@@ -97,7 +97,55 @@ bool ModulePlayer::Start()
 	car.wheels[3].steering = false;
 
 	vehicle = App->physics->AddVehicle(car);
-	vehicle->SetPos(0, 12, 10);
+	vehicle->SetPos(0, 1, 10);
+
+
+
+	VehicleInfo tro;
+	tro.chassis_size.Set(2, 1, 2);
+	tro.chassis_offset.Set(0, 1.5, 0);
+	tro.mass = 200.0f;
+	tro.suspensionStiffness = 15.88f;
+	tro.suspensionCompression = 0.83f;
+	tro.suspensionDamping = 0.88f;
+	tro.maxSuspensionTravelCm = 1000.0f;
+	tro.frictionSlip = 50.5;
+	tro.maxSuspensionForce = 6000.0f;
+
+	connection_height = 1.8f;
+
+	half_width = tro.chassis_size.x * 0.5f;
+	half_length = tro.chassis_size.z * 0.5f;
+
+	tro.num_wheels = 2;
+	tro.wheels = new Wheel[2];
+
+	tro.wheels[0].connection.Set(half_width - 0.3f * wheel_width, connection_height, 0.0f);
+	tro.wheels[0].direction = direction;
+	tro.wheels[0].axis = axis;
+	tro.wheels[0].suspensionRestLength = suspensionRestLength;
+	tro.wheels[0].radius = wheel_radius;
+	tro.wheels[0].width = wheel_width;
+	tro.wheels[0].front = true;
+	tro.wheels[0].drive = true;
+	tro.wheels[0].brake = false;
+	tro.wheels[0].steering = true;
+
+	tro.wheels[1].connection.Set(-half_width + 0.3f * wheel_width, connection_height, 0.0f);
+	tro.wheels[1].direction = direction;
+	tro.wheels[1].axis = axis;
+	tro.wheels[1].suspensionRestLength = suspensionRestLength;
+	tro.wheels[1].radius = wheel_radius;
+	tro.wheels[1].width = wheel_width;
+	tro.wheels[1].front = true;
+	tro.wheels[1].drive = true;
+	tro.wheels[1].brake = false;
+	tro.wheels[1].steering = true;
+
+	trolley = App->physics->AddVehicle(tro);
+	trolley->SetPos(0, 1, 8);
+
+	App->physics->AddConstraintP2P(*vehicle, *trolley, vec3(0, -0.6f, -1.6f), vec3(0, 0, 2));
 	
 	return true;
 }
