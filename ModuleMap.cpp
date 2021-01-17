@@ -26,6 +26,12 @@ bool ModuleMap::Start()
 
 update_status ModuleMap::Update(float dt)
 {
+	p2List_item<Primitive*>* item = objects.getFirst();
+	while (item)
+	{
+		item->data->Render();
+		item = item->next;
+	}
 	return UPDATE_CONTINUE;
 }
 
@@ -40,15 +46,15 @@ void ModuleMap::CreateRectangles()
 	//Left
 	//---------------------STAGE 1------------------------------
 	// Walls
-	CreateRectangle({ 7,1,60.0f }, { 0,0,0,1 }, { 1,3.0f,120.0f }, Red);
+	CreateRectangle({ 7,1,60.0f }, { 0,0,0,1 }, { 1,3.0f,120.0f }, Purple);
 	CreateRectangle({ -38,1,60.0f }, { 0,0,0,1 }, { 1,3.0f,120.0f }, Red);
 
 	//Posts
-	CreateRectangle({ 7,1,125.0f }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
+	CreateRectangle({ 7,1,125.0f }, { 0,0,0,1 }, { 1,3.f,1 }, White);
 	CreateRectangle({ 6,1,132.0f }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
-	CreateRectangle({ 4,1,139.0f }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
-	CreateRectangle({ 0,1,140.0f }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
-	CreateRectangle({ -2,1,140.0f }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
+	CreateRectangle({ 4,1,139.0f }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	CreateRectangle({ 0,1,140.0f }, { 0,0,0,1 }, { 1,3.f,1 }, Yellow);
+	CreateRectangle({ -2,1,140.0f }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
 	CreateRectangle({ -5,1,140.0f }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
 	CreateRectangle({ -7,1,140.0f }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
 	CreateRectangle({ -9,1,140.0f }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
@@ -109,7 +115,6 @@ PhysBody3D* ModuleMap::CreateRectangle(vec3 position, vec4 rotation, vec3 size, 
 	object->size = size;
 	object->color = c;
 	object->SetRotation(rotation.x, { rotation.y, rotation.z, rotation.w });
-
 	objects.add(object);
 	return App->physics->AddBody(*object, mass);
 }
