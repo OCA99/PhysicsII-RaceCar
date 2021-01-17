@@ -145,11 +145,11 @@ bool ModulePlayer::Start()
 	trolley = App->physics->AddVehicle(tro);
 	trolley->SetPos(0, 1, 8);
 
-	PhysVehicle3D* trolley2 = App->physics->AddVehicle(tro);
-	trolley->SetPos(0, 1, 6);
+	//trolley2 = App->physics->AddVehicle(tro);
+	//trolley2->SetPos(0, 1, 6);
 
 	App->physics->AddConstraintP2P(*vehicle, *trolley, vec3(0, -0.6f, -1.6f), vec3(0, 0, 2));
-	App->physics->AddConstraintP2P(*trolley, *trolley2, vec3(0, 0.0f, -1.6f), vec3(0, 0, 1.6f));
+	//App->physics->AddConstraintP2P(*trolley, *trolley2, vec3(0, 0.0f, -1.6f), vec3(0, 0, 1.6f));
 
 	return true;
 }
@@ -162,6 +162,40 @@ bool ModulePlayer::CleanUp()
 	return true;
 }
 
+void ModulePlayer::Reset()
+{
+	mat4x4 carMatrix;
+	vehicle->GetTransform(&carMatrix);
+
+	carMatrix.rotate(0, { 0, 1, 0 });
+	carMatrix.translate(0, 1, 10);
+
+	vehicle->SetTransform(&carMatrix.M[0]);
+
+	vehicle->vehicle->getRigidBody()->setLinearVelocity({ 0, 0, 0 });
+	vehicle->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });
+
+	trolley->GetTransform(&carMatrix);
+
+	carMatrix.rotate(0, { 0, 1, 0 });
+	carMatrix.translate(0, 1, 8);
+
+	trolley->SetTransform(&carMatrix.M[0]);
+
+	trolley->vehicle->getRigidBody()->setLinearVelocity({ 0, 0, 0 });
+	trolley->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });
+
+	//trolley2->GetTransform(&carMatrix);
+
+	//carMatrix.rotate(0, { 0, 1, 0 });
+	//carMatrix.translate(0, 1, 6);
+
+	//trolley2->SetTransform(&carMatrix.M[0]);
+
+	//trolley2->vehicle->getRigidBody()->setLinearVelocity({ 0, 0, 0 });
+	//trolley2->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });
+}
+
 // Update: draw background
 update_status ModulePlayer::Update(float dt)
 {
@@ -169,7 +203,14 @@ update_status ModulePlayer::Update(float dt)
 
 	if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 	{
-		acceleration = MAX_ACCELERATION;
+		if (vehicle->GetKmh() < -1.0f)
+		{
+			brake = BRAKE_POWER;
+		}
+		else
+		{
+			acceleration = MAX_ACCELERATION;
+		}
 	}
 
 	if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
@@ -186,7 +227,19 @@ update_status ModulePlayer::Update(float dt)
 
 	if(App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 	{
-		acceleration = -MAX_ACCELERATION ;
+		if (vehicle->GetKmh() > 1.0f)
+		{
+			brake = BRAKE_POWER;
+		}
+		else
+		{
+			acceleration = -MAX_ACCELERATION;
+		}
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	{
+		Reset();
 	}
 
 	vehicle->ApplyEngineForce(acceleration);
@@ -195,6 +248,7 @@ update_status ModulePlayer::Update(float dt)
 
 	vehicle->Render();
 	trolley->Render();
+	//trolley2->Render();
 
 	char title[80];
 	sprintf_s(title, "%.1f Km/h", vehicle->GetKmh());
