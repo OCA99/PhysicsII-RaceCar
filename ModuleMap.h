@@ -13,4 +13,10 @@ public:
 	ModuleMap(Application* app, bool start_enabled = true);
 	~ModuleMap();
 
+	bool Start();
+	update_status Update(float dt);
+	bool CleanUp();
+
+private:
+
 };
