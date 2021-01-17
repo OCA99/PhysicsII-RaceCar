@@ -3,8 +3,6 @@
 #include "Globals.h"
 
 struct PhysBody3D;
-struct PhysMotor3D;
-struct PhysSensor3D;
 
 class ModuleMap : public Module
 {
@@ -17,6 +15,11 @@ public:
 	update_status Update(float dt);
 	bool CleanUp();
 
-private:
+	void CreateRectangles();
 
+	PhysBody3D* CreateRectangle(vec3 position, vec4 rotation, vec3 size, Color s_color, float mass);
+
+
+private:
+	p2List<Primitive*> objects;
 };
