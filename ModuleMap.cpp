@@ -37,17 +37,27 @@ bool ModuleMap::CleanUp()
 
 void ModuleMap::CreateRectangles()
 {
-	
-	CreateRectangle({ 7,1,0 }, { 0,0,0,1 }, { 1,3.f,1 }, White, 500.0f);
+	//Left
+	CreateRectangle({ 7,1,15 }, { 0,0,0,1 }, { 1,3.f,1 }, Red, 500.0f);
+	CreateRectangle({ 7,1,25 }, { 0,0,0,1 }, { 1,3.f,1 }, Red, 500.0f);
+	CreateRectangle({ 7,1,35 }, { 0,0,0,1 }, { 1,3.f,1 }, Red, 500.0f);
+	CreateRectangle({ 7,1,45 }, { 0,0,0,1 }, { 1,3.f,1 }, Red, 500.0f);
+
+	//Right
+	CreateRectangle({ -7,1,15 }, { 0,0,0,1 }, { 1,3.f,1 }, Red, 500.0f);
+	CreateRectangle({ -7,1,25 }, { 0,0,0,1 }, { 1,3.f,1 }, Red, 500.0f);
+	CreateRectangle({ -7,1,35 }, { 0,0,0,1 }, { 1,3.f,1 }, Red, 500.0f);
+	CreateRectangle({ -7,1,45 }, { 0,0,0,1 }, { 1,3.f,1 }, Red, 500.0f);
+
 }
 
-PhysBody3D* ModuleMap::CreateRectangle(vec3 position, vec4 rotation, vec3 size, Color s_color, float mass)
+PhysBody3D* ModuleMap::CreateRectangle(vec3 position, vec4 rotation, vec3 size, Color c, float mass)
 {
 	Cube* object = new Cube();
 
 	object->SetPos(position.x, position.y, position.z);
 	object->size = size;
-	object->color = s_color;
+	object->color = c;
 	object->SetRotation(rotation.x, { rotation.y, rotation.z, rotation.w });
 
 	objects.add(object);
