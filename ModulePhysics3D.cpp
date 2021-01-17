@@ -87,20 +87,36 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 			PhysBody3D* pbodyA = (PhysBody3D*)obA->getUserPointer();
 			PhysBody3D* pbodyB = (PhysBody3D*)obB->getUserPointer();
 
-			if(pbodyA && pbodyB)
+			if ((pbodyA && pbodyA->IsSensor()) || (pbodyB && pbodyB->IsSensor()))
 			{
-				p2List_item<Module*>* item = pbodyA->collision_listeners.getFirst();
-				while(item)
+				PhysSensor3D* sensor = nullptr;
+				if (pbodyA && pbodyA->IsSensor())
 				{
-					item->data->OnCollision(pbodyA, pbodyB);
-					item = item->next;
+					sensor = (PhysSensor3D*)pbodyA;
 				}
-
-				item = pbodyB->collision_listeners.getFirst();
-				while(item)
+				else if (pbodyB && pbodyB->IsSensor())
 				{
-					item->data->OnCollision(pbodyB, pbodyA);
-					item = item->next;
+					sensor = (PhysSensor3D*)pbodyB;
+				}
+			}
+			else
+			{
+
+				if (pbodyA && pbodyB)
+				{
+					p2List_item<Module*>* item = pbodyA->collision_listeners.getFirst();
+					while (item)
+					{
+						item->data->OnCollision(pbodyA, pbodyB);
+						item = item->next;
+					}
+
+					item = pbodyB->collision_listeners.getFirst();
+					while (item)
+					{
+						item->data->OnCollision(pbodyB, pbodyA);
+						item = item->next;
+					}
 				}
 			}
 		}

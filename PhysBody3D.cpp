@@ -4,18 +4,14 @@
 
 // =================================================
 PhysBody3D::PhysBody3D(btRigidBody* body) : body(body)
-{}
+{
+	is_sensor = false;
+}
 
 // ---------------------------------------------------------
 PhysBody3D::~PhysBody3D()
 {
 	delete body;
-}
-
-PhysBody3D::PhysBody3D(btRigidBody* body, bool sensor):body(body)
-{
-	this->is_sensor = sensor;
-	SetAsSensor();
 }
 
 // ---------------------------------------------------------
@@ -53,13 +49,19 @@ void PhysBody3D::SetPos(float x, float y, float z)
 
 }
 
-void PhysBody3D::SetAsSensor()
+PhysSensor3D::~PhysSensor3D()
 {
-	if (this->is_sensor == true)
-	{
-		if (this->is_sensor == true)
-			body->setCollisionFlags(body->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
-		else
-			body->setCollisionFlags(body->getCollisionFlags() & ~btCollisionObject::CF_NO_CONTACT_RESPONSE);
-	}
+	delete body;
+}
+
+PhysSensor3D::PhysSensor3D(btRigidBody* body, Type _type) : PhysBody3D(body)
+{
+	type = _type;
+	SetAsSensor();
+}
+
+void PhysSensor3D::SetAsSensor()
+{
+	is_sensor = true;
+	body->setCollisionFlags(body->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
 }

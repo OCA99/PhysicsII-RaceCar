@@ -12,7 +12,6 @@ struct PhysBody3D
 	friend class ModulePhysics3D;
 public:
 	PhysBody3D(btRigidBody* body);
-	PhysBody3D(btRigidBody* body, bool is_sensor);
 
 	~PhysBody3D();
 
@@ -20,14 +19,32 @@ public:
 	void GetTransform(float* matrix) const;
 	void SetTransform(const float* matrix) const;
 	void SetPos(float x, float y, float z);
-	void SetAsSensor();
+	bool IsSensor() { return is_sensor; };
 
-private:
+protected:
 	btRigidBody* body = nullptr;
 
 public:
 	p2List<Module*> collision_listeners;
 	bool is_sensor;
+};
+
+struct PhysSensor3D : public PhysBody3D
+{
+
+public:
+	enum class Type
+	{
+		FINISH
+	};
+
+	PhysSensor3D(btRigidBody* body, Type _type);
+	~PhysSensor3D();
+
+	void SetAsSensor();
+
+public:
+	Type type;
 };
 
 #endif // __PhysBody3D_H__
