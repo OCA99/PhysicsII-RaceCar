@@ -13,3 +13,18 @@ ModuleMap::~ModuleMap()
 {
 
 }
+
+bool ModuleMap::Start()
+{
+
+}
+
+update_status ModuleMap::Update(float dt)
+{
+	return UPDATE_CONTINUE;
+}
+
+bool ModuleMap::CleanUp()
+{
+
+}
