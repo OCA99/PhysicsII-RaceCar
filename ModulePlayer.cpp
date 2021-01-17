@@ -145,8 +145,12 @@ bool ModulePlayer::Start()
 	trolley = App->physics->AddVehicle(tro);
 	trolley->SetPos(0, 1, 8);
 
+	PhysVehicle3D* trolley2 = App->physics->AddVehicle(tro);
+	trolley->SetPos(0, 1, 6);
+
 	App->physics->AddConstraintP2P(*vehicle, *trolley, vec3(0, -0.6f, -1.6f), vec3(0, 0, 2));
-	
+	App->physics->AddConstraintP2P(*trolley, *trolley2, vec3(0, 0.0f, -1.6f), vec3(0, 0, 1.6f));
+
 	return true;
 }
 
