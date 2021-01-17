@@ -98,6 +98,14 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 				{
 					sensor = (PhysSensor3D*)pbodyB;
 				}
+
+				switch (sensor->type)
+				{
+				case PhysSensor3D::Type::FINISH:
+					break;
+				default:
+					break;
+				}
 			}
 			else
 			{
