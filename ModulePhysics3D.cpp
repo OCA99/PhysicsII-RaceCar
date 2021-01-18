@@ -229,6 +229,33 @@ bool ModulePhysics3D::CleanUp()
 	return true;
 }
 
+PhysSensor3D* ModulePhysics3D::AddSensor(const Cube& cube, PhysSensor3D::Type type, float mass)
+{
+	btCollisionShape* colShape = new btBoxShape(btVector3(cube.size.x * 0.5f, cube.size.y * 0.5f, cube.size.z * 0.5f));
+	shapes.add(colShape);
+
+	btTransform startTransform;
+	startTransform.setFromOpenGLMatrix(&cube.transform);
+
+	btVector3 localInertia(0, 0, 0);
+	if (mass != 0.f)
+		colShape->calculateLocalInertia(mass, localInertia);
+
+	btDefaultMotionState* myMotionState = new btDefaultMotionState(startTransform);
+	motions.add(myMotionState);
+	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, myMotionState, colShape, localInertia);
+
+	btRigidBody* body = new btRigidBody(rbInfo);
+	PhysSensor3D* pbody = new PhysSensor3D(body,type);
+	pbody->SetAsSensor();
+
+	body->setUserPointer(pbody);
+	world->addRigidBody(body);
+	bodies.add(pbody);
+
+	return pbody;
+}
+
 // ---------------------------------------------------------
 PhysBody3D* ModulePhysics3D::AddBody(const Sphere& sphere, float mass)
 {
