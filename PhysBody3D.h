@@ -35,7 +35,8 @@ struct PhysSensor3D : public PhysBody3D
 public:
 	enum class Type
 	{
-		FINISH
+		FINISH,
+		LAP
 	};
 
 	PhysSensor3D(btRigidBody* body, Type _type);

@@ -118,3 +118,16 @@ PhysBody3D* ModuleMap::CreateRectangle(vec3 position, vec4 rotation, vec3 size, 
 	objects.add(object);
 	return App->physics->AddBody(*object, mass);
 }
+
+//PhysSensor3D* ModuleMap::CreateSensor(vec3 position, vec4 rotation, vec3 size, Color c, float mass)
+//{
+//	Cube* object = new Cube();
+//
+//	object->SetPos(position.x, position.y, position.z);
+//	object->size = size;
+//	object->color = c;
+//	object->SetRotation(rotation.x, { rotation.y, rotation.z, rotation.w });
+//	object.
+//	objects.add(object);
+//	return App->physics->AddBody(*object, mass);
+//}
