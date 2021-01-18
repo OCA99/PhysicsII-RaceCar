@@ -251,8 +251,15 @@ update_status ModulePlayer::Update(float dt)
 	//trolley2->Render();
 
 	char title[80];
-	sprintf_s(title, "%.1f Km/h", vehicle->GetKmh());
+	sprintf_s(title, "%.1f Km/h  Laps: %i", vehicle->GetKmh(),this->laps);
 	App->window->SetTitle(title);
+
+	/*if (laps == 1)
+		vehicle->info.chassis_size.Set(100, 1, 1);
+	if (laps == 2)
+		vehicle->info.chassis_size.Set(1, 100, 1);
+	if (laps == 3)
+		vehicle->info.chassis_size.Set(1, 1, 100);*/
 
 	return UPDATE_CONTINUE;
 }

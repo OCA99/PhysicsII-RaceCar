@@ -100,10 +100,11 @@ void ModuleMap::CreateRectangles()
 	CreateRectangle({ -24,1, -2.0f }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
 
 	//Ramps
-	CreateRectangle({ 0,0,60.0f }, { 60,1, 0, 0 }, { 14,10,0.5f }, Red);
-	CreateRectangle({ -30,0,80.0f }, { 120,1, 0, 0}, { 14,10,0.5f }, Red);
+	CreateRectangle({ 0,0,60.0f }, { 80,1, 0, 0 }, { 14,10,0.5f }, Red);
+	CreateRectangle({ -30,0,80.0f }, { 280,1, 0, 0}, { 14,10,0.5f }, Red);
 
-	CreateSensor({ -30,0,80.0f }, { 120,1, 0, 0 }, { 14,10,0.5f }, PhysSensor3D::Type::LAP);
+	CreateSensor({ -30,0,80.0f }, { 0,1, 0, 0 }, { 14,10,0.5f }, PhysSensor3D::Type::LAP);
+	CreateSensor({ 0,0,60.0f }, { 0,1, 0, 0 }, { 14,10,0.5f }, PhysSensor3D::Type::FINISH);
 
 
 	//------------------------END OF STAGE 1----------------------
@@ -122,7 +123,6 @@ PhysBody3D* ModuleMap::CreateRectangle(vec3 position, vec4 rotation, vec3 size, 
 	return App->physics->AddBody(*object, mass);
 }
 
-//	Cube* object = new Cube();
 PhysSensor3D* ModuleMap::CreateSensor(vec3 position, vec4 rotation, vec3 size, PhysSensor3D::Type type, float mass)
 {
 	Cube* object = new Cube();
@@ -130,6 +130,6 @@ PhysSensor3D* ModuleMap::CreateSensor(vec3 position, vec4 rotation, vec3 size, P
 	object->SetPos(position.x, position.y, position.z);
 	object->size = size;
 	object->SetRotation(rotation.x, { rotation.y, rotation.z, rotation.w });
-	objects.add(object);
+	//objects.add(object);
 	return App->physics->AddSensor(*object,type);
 }
