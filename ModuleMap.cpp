@@ -27,11 +27,13 @@ bool ModuleMap::Start()
 update_status ModuleMap::Update(float dt)
 {
 	p2List_item<Primitive*>* item = objects.getFirst();
+
 	while (item)
 	{
 		item->data->Render();
 		item = item->next;
 	}
+
 	return UPDATE_CONTINUE;
 }
 
@@ -101,13 +103,13 @@ void ModuleMap::CreateRectangles()
 
 	//Ramps
 	CreateRectangle({ 0,0,60.0f }, { 60,1, 0, 0 }, { 14,10,0.5f }, Red);
-	CreateRectangle({ -30,0,80.0f }, { 120,1, 0, 0}, { 14,10,0.5f }, Red);
+	CreateRectangle({ -30,0,80.0f }, { 120,1, 0, 0 }, { 14,10,0.5f }, Red);
 
 	//------------------------END OF STAGE 1----------------------
 
 }
 
-PhysBody3D* ModuleMap::CreateRectangle(vec3 position, vec4 rotation, vec3 size, Color c, float mass)
+void ModuleMap::CreateRectangle(vec3 position, vec4 rotation, vec3 size, Color c, float mass)
 {
 	Cube* object = new Cube();
 
@@ -116,5 +118,13 @@ PhysBody3D* ModuleMap::CreateRectangle(vec3 position, vec4 rotation, vec3 size, 
 	object->color = c;
 	object->SetRotation(rotation.x, { rotation.y, rotation.z, rotation.w });
 	objects.add(object);
-	return App->physics->AddBody(*object, mass);
+	App->physics->AddBody(*object, mass);
 }
+
+void ModuleMap::CreateSensor(vec3 position, vec4 rotation, vec3 size, Color c)
+{
+
+
+
+}
+

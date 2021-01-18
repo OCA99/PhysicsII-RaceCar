@@ -17,9 +17,11 @@ public:
 
 	void CreateRectangles();
 
-	PhysBody3D* CreateRectangle(vec3 position, vec4 rotation, vec3 size, Color s_color, float mass = 0.0f);
-
+	void CreateRectangle(vec3 position, vec4 rotation, vec3 size, Color s_color, float mass = 0.0f);
+	void CreateSensor(vec3 position, vec4 rotation, vec3 size, Color c);
 
 private:
 	p2List<Primitive*> objects;
+	float i = 0;
+
 };
