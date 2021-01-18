@@ -99,8 +99,6 @@ bool ModulePlayer::Start()
 	vehicle = App->physics->AddVehicle(car);
 	vehicle->SetPos(0, 1, 10);
 
-
-
 	VehicleInfo tro;
 	tro.chassis_size.Set(2, 1, 2);
 	tro.chassis_offset.Set(0, 1.5, 0);
@@ -145,11 +143,7 @@ bool ModulePlayer::Start()
 	trolley = App->physics->AddVehicle(tro);
 	trolley->SetPos(0, 1, 8);
 
-	//trolley2 = App->physics->AddVehicle(tro);
-	//trolley2->SetPos(0, 1, 6);
-
 	App->physics->AddConstraintP2P(*vehicle, *trolley, vec3(0, -0.6f, -1.6f), vec3(0, 0, 2));
-	//App->physics->AddConstraintP2P(*trolley, *trolley2, vec3(0, 0.0f, -1.6f), vec3(0, 0, 1.6f));
 
 	return true;
 }
@@ -200,7 +194,10 @@ void ModulePlayer::Reset()
 update_status ModulePlayer::Update(float dt)
 {
 	turn = acceleration = brake = 0.0f;
-
+	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
+	{
+		laps++;
+	}
 	if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 	{
 		if (vehicle->GetKmh() < -1.0f)
@@ -248,18 +245,55 @@ update_status ModulePlayer::Update(float dt)
 
 	vehicle->Render();
 	trolley->Render();
+
 	//trolley2->Render();
 
 	char title[80];
 	sprintf_s(title, "%.1f Km/h  Laps: %i", vehicle->GetKmh(),this->laps);
 	App->window->SetTitle(title);
 
-	/*if (laps == 1)
-		vehicle->info.chassis_size.Set(100, 1, 1);
-	if (laps == 2)
-		vehicle->info.chassis_size.Set(1, 100, 1);
-	if (laps == 3)
-		vehicle->info.chassis_size.Set(1, 1, 100);*/
+	if (laps == 1)
+	{
+		vehicle->info.chassis_size.Set(1.8, 1.1f, 4);
+		vehicle->info.chassis_offset.Set(0, 1.5, 0);
+		vehicle->info.mass = 500.0f;
+		vehicle->info.suspensionStiffness = 10.0f;
+		vehicle->info.suspensionCompression = 1.0f;
+		vehicle->info.suspensionDamping = 0.88f;
+		vehicle->info.maxSuspensionTravelCm = 1000.0f;
+		vehicle->info.frictionSlip = 50.5;
+		vehicle->info.maxSuspensionForce = 6000.0f;
+
+
+	}
+	else if (laps == 2)
+	{
+		vehicle->info.chassis_size.Set(1.8, 1.1f, 6);
+		vehicle->info.chassis_offset.Set(0, 1.5, 0);
+		vehicle->info.mass = 1000.0f;
+		vehicle->info.suspensionStiffness = 100.0f;
+		vehicle->info.suspensionCompression = 100.f;
+		vehicle->info.suspensionDamping = 8.0f;
+		vehicle->info.maxSuspensionTravelCm = 1000.0f;
+		vehicle->info.frictionSlip = 50.5;
+		vehicle->info.maxSuspensionForce = 6000.0f;
+
+
+	}
+
+	else if (laps == 3)
+	{
+		vehicle->info.chassis_size.Set(1.8, 1.1f, 2);
+		vehicle->info.chassis_offset.Set(0, 1.5, 10);
+		vehicle->info.mass = 500.0f;
+		vehicle->info.suspensionStiffness = 10.f;
+		vehicle->info.suspensionCompression = 1.f;
+		vehicle->info.suspensionDamping = 0.88f;
+		vehicle->info.maxSuspensionTravelCm = 300.0f;
+		vehicle->info.frictionSlip = 50.5;
+		vehicle->info.maxSuspensionForce = 6000.0f;
+	}
+
 
 	return UPDATE_CONTINUE;
 }
