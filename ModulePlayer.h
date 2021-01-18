@@ -30,5 +30,5 @@ public:
 	float acceleration;
 	float brake;
 	bool lap = false;
-	int laps; 
+	int laps = 0; 
 };
