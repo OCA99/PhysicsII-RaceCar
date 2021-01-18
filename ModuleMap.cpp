@@ -100,8 +100,8 @@ void ModuleMap::CreateRectangles()
 	CreateRectangle({ -24,1, -2.0f }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
 
 	//Ramps
-	CreateRectangle({ 0,0,60.0f }, { 80,1, 0, 0 }, { 14,10,0.5f }, Red);
-	CreateRectangle({ -30,0,80.0f }, { 280,1, 0, 0}, { 14,10,0.5f }, Red);
+	CreateRectangle({ 0,0,60.0f }, { 75,1, 0, 0 }, { 14,10,0.5f }, Red);
+	CreateRectangle({ -30,0,80.0f }, { 285,1, 0, 0}, { 14,10,0.5f }, Red);
 
 	CreateSensor({ -30,0,80.0f }, { 0,1, 0, 0 }, { 14,10,0.5f }, PhysSensor3D::Type::LAP);
 	CreateSensor({ 0,0,60.0f }, { 0,1, 0, 0 }, { 14,10,0.5f }, PhysSensor3D::Type::FINISH);
