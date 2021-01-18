@@ -1,6 +1,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModulePhysics3D.h"
+#include "ModulePlayer.h"
 #include "PhysBody3D.h"
 #include "PhysVehicle3D.h"
 #include "Primitive.h"
@@ -24,6 +25,7 @@ ModulePhysics3D::ModulePhysics3D(Application* app, bool start_enabled) : Module(
 	broad_phase = new btDbvtBroadphase();
 	solver = new btSequentialImpulseConstraintSolver();
 	debug_draw = new DebugDrawer();
+
 }
 
 // Destructor
@@ -101,7 +103,19 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 
 				switch (sensor->type)
 				{
+				case PhysSensor3D::Type::LAP:
+				{
+					App->player->lap = true;
+				}
+					break;
 				case PhysSensor3D::Type::FINISH:
+				{
+					if (App->player->lap == true)
+					{
+						App->player->laps++;
+						App->player->lap = false;
+					}
+				}
 					break;
 				default:
 					break;
@@ -269,6 +283,7 @@ PhysBody3D* ModulePhysics3D::AddBody(const Cube& cube, float mass)
 
 	return pbody;
 }
+
 
 // ---------------------------------------------------------
 PhysBody3D* ModulePhysics3D::AddBody(const Cylinder& cylinder, float mass)
