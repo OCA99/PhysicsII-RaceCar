@@ -3,6 +3,7 @@
 #include "Globals.h"
 #include "p2List.h"
 #include "Primitive.h"
+#include  "PhysBody3D.h"
 
 #include "Bullet/include/btBulletDynamicsCommon.h"
 
@@ -11,6 +12,7 @@
 
 class DebugDrawer;
 struct PhysBody3D;
+struct PhysSensor3D;
 struct PhysVehicle3D;
 struct VehicleInfo;
 
@@ -27,6 +29,8 @@ public:
 	update_status PostUpdate(float dt);
 	bool CleanUp();
 
+
+	PhysSensor3D* AddSensor(const Cube& cube, PhysSensor3D::Type type, float mass = 0.0f);
 	PhysBody3D* AddBody(const Sphere& sphere, float mass = 1.0f);
 	PhysBody3D* AddBody(const Cube& cube, float mass = 1.0f);
 	PhysBody3D* AddBody(const Cylinder& cylinder, float mass = 1.0f);

@@ -103,6 +103,9 @@ void ModuleMap::CreateRectangles()
 	CreateRectangle({ 0,0,60.0f }, { 60,1, 0, 0 }, { 14,10,0.5f }, Red);
 	CreateRectangle({ -30,0,80.0f }, { 120,1, 0, 0}, { 14,10,0.5f }, Red);
 
+	CreateSensor({ -30,0,80.0f }, { 120,1, 0, 0 }, { 14,10,0.5f }, PhysSensor3D::Type::LAP);
+
+
 	//------------------------END OF STAGE 1----------------------
 
 }
@@ -119,15 +122,14 @@ PhysBody3D* ModuleMap::CreateRectangle(vec3 position, vec4 rotation, vec3 size, 
 	return App->physics->AddBody(*object, mass);
 }
 
-//PhysSensor3D* ModuleMap::CreateSensor(vec3 position, vec4 rotation, vec3 size, Color c, float mass)
-//{
 //	Cube* object = new Cube();
-//
-//	object->SetPos(position.x, position.y, position.z);
-//	object->size = size;
-//	object->color = c;
-//	object->SetRotation(rotation.x, { rotation.y, rotation.z, rotation.w });
-//	object.
-//	objects.add(object);
-//	return App->physics->AddBody(*object, mass);
-//}
+PhysSensor3D* ModuleMap::CreateSensor(vec3 position, vec4 rotation, vec3 size, PhysSensor3D::Type type, float mass)
+{
+	Cube* object = new Cube();
+
+	object->SetPos(position.x, position.y, position.z);
+	object->size = size;
+	object->SetRotation(rotation.x, { rotation.y, rotation.z, rotation.w });
+	objects.add(object);
+	return App->physics->AddSensor(*object,type);
+}
