@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModulePhysics3D.h"
 #include "ModulePlayer.h"
+#include "ModuleMap.h"
 #include "PhysBody3D.h"
 #include "PhysVehicle3D.h"
 #include "Primitive.h"
@@ -119,7 +120,8 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 				}
 				case PhysSensor3D::Type::DEAD:
 				{
-					App->player->Reset();
+					if (App->map->GetLevel() == 1) App->player->LevelSpawn1();
+					if(App->map->GetLevel() == 2) App->player->LevelSpawn2();
 				}
 				default:
 					break;

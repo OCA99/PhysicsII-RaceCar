@@ -156,7 +156,7 @@ bool ModulePlayer::CleanUp()
 	return true;
 }
 
-void ModulePlayer::Reset()
+void ModulePlayer::LevelSpawn1()
 {
 	mat4x4 carMatrix;
 	vehicle->GetTransform(&carMatrix);
@@ -190,10 +190,46 @@ void ModulePlayer::Reset()
 	//trolley2->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });
 }
 
+void ModulePlayer::LevelSpawn2()
+{
+	mat4x4 carMatrix;
+	vehicle->GetTransform(&carMatrix);
+
+	carMatrix.rotate(0, { 0, 1, 0 });
+	carMatrix.translate(100, 2, -10);
+
+	vehicle->SetTransform(&carMatrix.M[0]);
+
+	vehicle->vehicle->getRigidBody()->setLinearVelocity({ 0, 0, 0 });
+	vehicle->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });
+
+	trolley->GetTransform(&carMatrix);
+
+	carMatrix.rotate(0, { 0, 1, 0 });
+	carMatrix.translate(100, 1, -8);
+
+	trolley->SetTransform(&carMatrix.M[0]);
+
+	trolley->vehicle->getRigidBody()->setLinearVelocity({ 0, 0, 0 });
+	trolley->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });
+
+	//trolley2->GetTransform(&carMatrix);
+
+	//carMatrix.rotate(0, { 0, 1, 0 });
+	//carMatrix.translate(0, 1, 6);
+
+	//trolley2->SetTransform(&carMatrix.M[0]);
+
+	//trolley2->vehicle->getRigidBody()->setLinearVelocity({ 0, 0, 0 });
+	//trolley2->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });
+}
 // Update: draw background
 update_status ModulePlayer::Update(float dt)
 {
-
+	if (App->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
+	{
+		LevelSpawn2();
+	}
 	turn = acceleration = brake = 0.0f;
 	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
 	{
@@ -241,7 +277,7 @@ update_status ModulePlayer::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
-		Reset();
+		LevelSpawn1();
 	}
 
 	vehicle->ApplyEngineForce(acceleration);
@@ -254,7 +290,7 @@ update_status ModulePlayer::Update(float dt)
 	//trolley2->Render();
 
 	char title[80];
-	sprintf_s(title, "%.1f Km/h  Laps: %i", vehicle->GetKmh(), this->laps);
+	sprintf_s(title, "%.1f Km/h  Laps: %i Level: %d", vehicle->GetKmh(), this->laps,App->map->GetLevel());
 	App->window->SetTitle(title);
 	if ((int)counter == 3 && !one)
 	{
@@ -303,45 +339,37 @@ update_status ModulePlayer::Update(float dt)
 	{
 	case 1:
 	{
-		//vehicle->info.chassis_size.Set(1.8, 1.1f, 4);
-		//vehicle->info.chassis_offset.Set(0, 1.5, 0);
-		//vehicle->info.mass = 500.0f;
-		//vehicle->info.suspensionStiffness = 10.0f;
-		//vehicle->info.suspensionCompression = 1.0f;
-		//vehicle->info.suspensionDamping = 0.88f;
-		//vehicle->info.maxSuspensionTravelCm = 1000.0f;
-		//vehicle->info.frictionSlip = 50.5;
-		//vehicle->info.maxSuspensionForce = 6000.0f;
+
 
 		break;
 	}
 	case 2:
 	{
-		//vehicle->info.chassis_size.Set(1.8, 1.1f, 6);
-		//vehicle->info.chassis_offset.Set(0, 1.5, 0);
-		//vehicle->info.mass = 1000.0f;
-		//vehicle->info.suspensionStiffness = 100.0f;
-		//vehicle->info.suspensionCompression = 100.f;
-		//vehicle->info.suspensionDamping = 8.0f;
-		//vehicle->info.maxSuspensionTravelCm = 1000.0f;
-		//vehicle->info.frictionSlip = 50.5;
-		//vehicle->info.maxSuspensionForce = 6000.0f;
+
 
 		break;
 	}
 	case 3:
 	{
-		//vehicle->info.chassis_size.Set(1.8, 1.1f, 2);
-		//vehicle->info.chassis_offset.Set(0, 1.5, 10);
-		//vehicle->info.mass = 500.0f;
-		//vehicle->info.suspensionStiffness = 10.f;
-		//vehicle->info.suspensionCompression = 1.f;
-		//vehicle->info.suspensionDamping = 0.88f;
-		//vehicle->info.maxSuspensionTravelCm = 300.0f;
-		//vehicle->info.frictionSlip = 50.5;
-		//vehicle->info.maxSuspensionForce = 6000.0f;
 
+		switch (App->map->GetLevel())
+		{
+		case 1:
+		{
+			LevelSpawn2();
 
+			break;
+		}
+		case 2:
+		{
+			LevelSpawn1();
+			break;
+		}
+		default:
+			break;
+		}
+		App->map->NextLevel();
+		laps = 0;
 		break;
 	}
 	default:
