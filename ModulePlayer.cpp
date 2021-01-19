@@ -224,14 +224,44 @@ void ModulePlayer::LevelSpawn2()
 	//trolley2->vehicle->getRigidBody()->setLinearVelocity({ 0, 0, 0 });
 	//trolley2->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });
 }
+
+void ModulePlayer::LevelSpawn3()
+{
+	mat4x4 carMatrix;
+	vehicle->GetTransform(&carMatrix);
+
+	carMatrix.rotate(0, { 0, 1, 0 });
+	carMatrix.translate(-100, 2, -10);
+
+	vehicle->SetTransform(&carMatrix.M[0]);
+
+	vehicle->vehicle->getRigidBody()->setLinearVelocity({ 0, 0, 0 });
+	vehicle->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });
+
+	trolley->GetTransform(&carMatrix);
+
+	carMatrix.rotate(0, { 0, 1, 0 });
+	carMatrix.translate(-100, 1, -8);
+
+	trolley->SetTransform(&carMatrix.M[0]);
+
+	trolley->vehicle->getRigidBody()->setLinearVelocity({ 0, 0, 0 });
+	trolley->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });
+
+
+	//trolley2->GetTransform(&carMatrix);
+
+	//carMatrix.rotate(0, { 0, 1, 0 });
+	//carMatrix.translate(0, 1, 6);
+
+	//trolley2->SetTransform(&carMatrix.M[0]);
+
+	//trolley2->vehicle->getRigidBody()->setLinearVelocity({ 0, 0, 0 });
+	//trolley2->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });
+}
 // Update: draw background
 update_status ModulePlayer::Update(float dt)
 {
-
-	if (App->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
-	{
-		LevelSpawn2();
-	}
 	turn = acceleration = brake = 0.0f;
 	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
 	{
@@ -291,6 +321,11 @@ update_status ModulePlayer::Update(float dt)
 			LevelSpawn2();
 			break;
 		}
+		case 3:
+		{
+			LevelSpawn3();
+			break;
+		}
 		
 		default:
 			break;
@@ -327,26 +362,29 @@ update_status ModulePlayer::Update(float dt)
 	}
 	case 3:
 	{
-
+		App->map->NextLevel();
 		switch (App->map->GetLevel())
 		{
 		case 1:
 		{
 			//vec3 p(110, 0, 110);
-			LevelSpawn2();
-			App->map->CreateCountDown(vec3(100, 0, 110), dt);
+
 			break;
 		}
 		case 2:
 		{
-			LevelSpawn1();
-
+			LevelSpawn2();
+			App->map->CreateCountDown(vec3(100, 0, 110), dt);
 			break;
+		}
+		case 3:
+		{
+			LevelSpawn3();
+			App->map->CreateCountDown(vec3(-150, 0, 110), dt);
 		}
 		default:
 			break;
 		}
-		App->map->NextLevel();
 		laps = 0;
 		break;
 	}
