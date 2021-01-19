@@ -113,6 +113,7 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 					if (App->player->lap == true)
 					{
 						App->player->laps++;
+						App->player->doOnce *= -1;
 						App->player->lap = false;
 					}
 				}
