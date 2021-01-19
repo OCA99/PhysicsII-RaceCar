@@ -213,6 +213,7 @@ void ModulePlayer::LevelSpawn2()
 	trolley->vehicle->getRigidBody()->setLinearVelocity({ 0, 0, 0 });
 	trolley->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });
 
+
 	//trolley2->GetTransform(&carMatrix);
 
 	//carMatrix.rotate(0, { 0, 1, 0 });
@@ -226,6 +227,9 @@ void ModulePlayer::LevelSpawn2()
 // Update: draw background
 update_status ModulePlayer::Update(float dt)
 {
+	if(App->map->GetLevel() == 1) App->map->CreateCountDown(vec3(0, 0, 110), dt);
+	if(App->map->GetLevel() == 2) App->map->CreateCountDown(vec3(100, 0, 110), dt);
+
 	if (App->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
 	{
 		LevelSpawn2();
@@ -235,7 +239,7 @@ update_status ModulePlayer::Update(float dt)
 	{
 		laps++;
 	}
-	if (canMove > 0)
+	if (canMove)
 	{
 		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 		{
@@ -277,7 +281,22 @@ update_status ModulePlayer::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
-		LevelSpawn1();
+		switch (App->map->GetLevel())
+		{
+		case 1:
+		{
+			LevelSpawn1();
+			break;
+		}
+		case 2:
+		{
+			LevelSpawn2();
+			break;
+		}
+		
+		default:
+			break;
+		}
 	}
 
 	vehicle->ApplyEngineForce(acceleration);
@@ -290,56 +309,15 @@ update_status ModulePlayer::Update(float dt)
 	//trolley2->Render();
 
 	char title[80];
-	sprintf_s(title, "%.1f Km/h  Laps: %i Level: %d", vehicle->GetKmh(), this->laps,App->map->GetLevel());
+	sprintf_s(title, "%.1f Km/h  Laps: %i Level: %d", vehicle->GetKmh(), this->laps, App->map->GetLevel());
 	App->window->SetTitle(title);
-	if ((int)counter == 3 && !one)
-	{
-		//Text ONE
-		App->map->CreateRectangle({ 0,10,170.0f }, { 0,0,0,1 }, { 1,8.0f,1 }, White);
-		App->map->CreateRectangle({ 0.8f,12,170.0f }, { 30,0,0,1 }, { 1,3.0f,1 }, White);
-		if (boost)
-		{
-			for (int i = 0; i < 5000; ++i)
-			{
-				acceleration = MAX_ACCELERATION * 100000;
-				vehicle->ApplyEngineForce(acceleration);
-			}
-		}
-		canMove *= -1;
-		one = true;
 
-	}
-	else if ((int)counter == 2 && !one && !two)
-	{
-		//Text TWO
-		App->map->CreateRectangle({ -8,13,170.0f }, { 0,0,0,1 }, { 5,1,1 }, Green);
-		App->map->CreateRectangle({ -10,12,170.0f }, { 90,0,0,1 }, { 3,1,1 }, Green);
-		App->map->CreateRectangle({ -8,10,170.0f }, { 0,0,0,1 }, { 5,1,1 }, Green);
-		App->map->CreateRectangle({ -6,9,170.0f }, { 90,0,0,1 }, { 3,1,1 }, Green);
-		App->map->CreateRectangle({ -8,7,170.0f }, { 0,0,0,1 }, { 5,1,1 }, Green);
-		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-		{
-			boost = true;
-		}
-		two = true;
-	}
-	else if ((int)counter == 1 && !one && !three)
-	{
-		//Text THREE
-		App->map->CreateRectangle({ -18,13,170.0f }, { 0,0,0,1 }, { 5,1,1 }, Red);
-		App->map->CreateRectangle({ -20,12,170.0f }, { 90,0,0,1 }, { 3,1,1 }, Red);
-		App->map->CreateRectangle({ -18,10,170.0f }, { 0,0,0,1 }, { 5,1,1 }, Red);
-		App->map->CreateRectangle({ -20,9,170.0f }, { 90,0,0,1 }, { 3,1,1 }, Red);
-		App->map->CreateRectangle({ -18,7,170.0f }, { 0,0,0,1 }, { 5,1,1 }, Red);
-		three = true;
-	}
-	else if (!one) counter += dt;
-
+	//CHECKPOINTS
 	switch (laps)
 	{
 	case 1:
 	{
-
+		
 
 		break;
 	}
@@ -356,13 +334,15 @@ update_status ModulePlayer::Update(float dt)
 		{
 		case 1:
 		{
+			//vec3 p(110, 0, 110);
 			LevelSpawn2();
-
+			App->map->CreateCountDown(vec3(100, 0, 110), dt);
 			break;
 		}
 		case 2:
 		{
 			LevelSpawn1();
+
 			break;
 		}
 		default:
@@ -375,6 +355,7 @@ update_status ModulePlayer::Update(float dt)
 	default:
 		break;
 	}
+
 	return UPDATE_CONTINUE;
 }
 
