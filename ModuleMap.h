@@ -16,6 +16,8 @@ public:
 	bool CleanUp();
 
 	void CreateRectangles();
+	void NextLevel();
+	int GetLevel();
 
 	PhysBody3D* CreateRectangle(vec3 position, vec4 rotation, vec3 size, Color s_color, float mass = 0.0f);
 	PhysSensor3D* CreateSensor(vec3 position, vec4 rotation, vec3 size,PhysSensor3D::Type type, float mass = 0.0f);
@@ -23,4 +25,5 @@ public:
 
 private:
 	p2List<Primitive*> objects;
+	int level = 1;
 };

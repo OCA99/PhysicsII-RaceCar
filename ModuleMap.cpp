@@ -35,6 +35,11 @@ update_status ModuleMap::Update(float dt)
 	return UPDATE_CONTINUE;
 }
 
+void ModuleMap::NextLevel()
+{
+	level++;
+}
+
 bool ModuleMap::CleanUp()
 {
 	objects.clear();
@@ -101,7 +106,7 @@ void ModuleMap::CreateRectangles()
 
 	//Ramps
 	CreateRectangle({ 0,0,60.0f }, { 75,1, 0, 0 }, { 14,10,0.5f }, Red);
-	CreateRectangle({ -31,0,80.0f }, { 285,1, 0, 0}, { 14,10,0.5f }, Red);
+	CreateRectangle({ -31,0,80.0f }, { 285,1, 0, 0 }, { 14,10,0.5f }, Red);
 
 	CreateSensor({ -30,0,80.0f }, { 0,1, 0, 0 }, { 14,10,0.5f }, PhysSensor3D::Type::LAP);
 	CreateSensor({ 0,0,60.0f }, { 0,1, 0, 0 }, { 14,10,0.5f }, PhysSensor3D::Type::FINISH);
@@ -117,6 +122,25 @@ void ModuleMap::CreateRectangles()
 
 	//------------------------END OF STAGE 1----------------------
 
+	//---------------------STAGE 2------------------------------0,0,0= 100,0, 0
+	CreateRectangle({ 100,0,10 }, { 60,1, 0, 0 }, { 14,17,0.5f }, Red);
+	CreateRectangle({ 100,4.3f,20 }, { 0,0, 0, 1 }, { 14,0.3f,5 }, Red);
+	CreateRectangle({ 100,4.3f,32 }, { 0,0, 0, 1 }, { 3,0.3f,20 }, Red);
+	CreateRectangle({ 100,4.3f,46 }, { 0,0, 0, 1 }, { 14,0.3f,9 }, Red);
+	CreateRectangle({ 117,4.3f,46 }, { 0,0, 1, 1 }, { 20,0.3f,3 }, Red);
+	CreateRectangle({ 127,4.3f,46 }, { 0,0, 1, 1 }, { 5,0.3f,14 }, Red);
+	CreateRectangle({ 127,10.3f,62}, { 60,1, 0, 0 }, { 3,25,0.3f }, Red);
+
+	CreateSensor({ 110,0,80.0f }, { 0,0, 0, 1 }, { 60,1,128 }, PhysSensor3D::Type::DEAD);/*MIDDLE*/
+
+
+	//------------------------END OF STAGE 2----------------------
+
+}
+
+int ModuleMap::GetLevel()
+{
+	return level;
 }
 
 PhysBody3D* ModuleMap::CreateRectangle(vec3 position, vec4 rotation, vec3 size, Color c, float mass)
@@ -139,5 +163,5 @@ PhysSensor3D* ModuleMap::CreateSensor(vec3 position, vec4 rotation, vec3 size, P
 	object->size = size;
 	object->SetRotation(rotation.x, { rotation.y, rotation.z, rotation.w });
 	//objects.add(object);
-	return App->physics->AddSensor(*object,type);
+	return App->physics->AddSensor(*object, type);
 }
