@@ -26,7 +26,11 @@ public:
 	PhysVehicle3D* trolley;
 	PhysVehicle3D* trolley2;
 
-	int doOnce = 1;
+	//Checkes
+	bool one = false;
+	bool two = false;
+	bool three = false;
+
 	int canMove = -1;
 	bool boost = false;
 	float counter = 0;

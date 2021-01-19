@@ -256,51 +256,48 @@ update_status ModulePlayer::Update(float dt)
 	char title[80];
 	sprintf_s(title, "%.1f Km/h  Laps: %i", vehicle->GetKmh(), this->laps);
 	App->window->SetTitle(title);
-	if (doOnce > 0)
+	if ((int)counter == 3 && !one)
 	{
-		if (counter > 3)
+		//Text ONE
+		App->map->CreateRectangle({ 0,10,170.0f }, { 0,0,0,1 }, { 1,8.0f,1 }, White);
+		App->map->CreateRectangle({ 0.8f,12,170.0f }, { 30,0,0,1 }, { 1,3.0f,1 }, White);
+		if (boost)
 		{
-			//Text ONE
-			App->map->CreateRectangle({ 0,10,170.0f }, { 0,0,0,1 }, { 1,8.0f,1 }, White);
-			App->map->CreateRectangle({ 0.8f,12,170.0f }, { 30,0,0,1 }, { 1,3.0f,1 }, White);
-			doOnce *= -1;
-			if (boost)
+			for (int i = 0; i < 5000; ++i)
 			{
-				for (int i = 0; i < 5000; ++i)
-				{
-					acceleration = MAX_ACCELERATION * 100000;
-					vehicle->ApplyEngineForce(acceleration );
-				}
-			}
-			canMove *= -1;
-
-		}
-		if (counter > 2)
-		{
-			//Text TWO
-			App->map->CreateRectangle({ -8,13,170.0f }, { 0,0,0,1 }, { 5,1,1 }, Green);
-			App->map->CreateRectangle({ -10,12,170.0f }, { 90,0,0,1 }, { 3,1,1 }, Green);
-			App->map->CreateRectangle({ -8,10,170.0f }, { 0,0,0,1 }, { 5,1,1 }, Green);
-			App->map->CreateRectangle({ -6,9,170.0f }, { 90,0,0,1 }, { 3,1,1 }, Green);
-			App->map->CreateRectangle({ -8,7,170.0f }, { 0,0,0,1 }, { 5,1,1 }, Green);
-			if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-			{
-				boost = true;
+				acceleration = MAX_ACCELERATION * 100000;
+				vehicle->ApplyEngineForce(acceleration);
 			}
 		}
-		if (counter > 1)
-		{
-			//Text THREE
-			App->map->CreateRectangle({ -18,13,170.0f }, { 0,0,0,1 }, { 5,1,1 }, Red);
-			App->map->CreateRectangle({ -20,12,170.0f }, { 90,0,0,1 }, { 3,1,1 }, Red);
-			App->map->CreateRectangle({ -18,10,170.0f }, { 0,0,0,1 }, { 5,1,1 }, Red);
-			App->map->CreateRectangle({ -20,9,170.0f }, { 90,0,0,1 }, { 3,1,1 }, Red);
-			App->map->CreateRectangle({ -18,7,170.0f }, { 0,0,0,1 }, { 5,1,1 }, Red);
-		}
-		counter += dt;
-
+		canMove *= -1;
+		one = true;
 
 	}
+	else if ((int)counter == 2 && !one && !two)
+	{
+		//Text TWO
+		App->map->CreateRectangle({ -8,13,170.0f }, { 0,0,0,1 }, { 5,1,1 }, Green);
+		App->map->CreateRectangle({ -10,12,170.0f }, { 90,0,0,1 }, { 3,1,1 }, Green);
+		App->map->CreateRectangle({ -8,10,170.0f }, { 0,0,0,1 }, { 5,1,1 }, Green);
+		App->map->CreateRectangle({ -6,9,170.0f }, { 90,0,0,1 }, { 3,1,1 }, Green);
+		App->map->CreateRectangle({ -8,7,170.0f }, { 0,0,0,1 }, { 5,1,1 }, Green);
+		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+		{
+			boost = true;
+		}
+		two = true;
+	}
+	else if ((int)counter == 1 && !one && !three)
+	{
+		//Text THREE
+		App->map->CreateRectangle({ -18,13,170.0f }, { 0,0,0,1 }, { 5,1,1 }, Red);
+		App->map->CreateRectangle({ -20,12,170.0f }, { 90,0,0,1 }, { 3,1,1 }, Red);
+		App->map->CreateRectangle({ -18,10,170.0f }, { 0,0,0,1 }, { 5,1,1 }, Red);
+		App->map->CreateRectangle({ -20,9,170.0f }, { 90,0,0,1 }, { 3,1,1 }, Red);
+		App->map->CreateRectangle({ -18,7,170.0f }, { 0,0,0,1 }, { 5,1,1 }, Red);
+		three = true;
+	}
+	else if (!one) counter += dt;
 
 	switch (laps)
 	{
