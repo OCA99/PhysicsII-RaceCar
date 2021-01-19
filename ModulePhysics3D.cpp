@@ -111,11 +111,25 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 					break;
 				case PhysSensor3D::Type::FINISH:
 				{
-					if (App->player->lap == true)
+					switch (App->map->GetLevel())
 					{
-						App->player->laps++;
-						App->player->lap = false;
+					case 1:
+					{
+						if (App->player->lap == true)
+						{
+							App->player->laps++;
+							App->player->lap = false;
+						}
+						break;
 					}
+					case 2:
+					{
+						App->player->laps = 3;
+					}
+					default:
+						break;
+					}
+
 					break;
 				}
 				case PhysSensor3D::Type::DEAD:

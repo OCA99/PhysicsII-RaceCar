@@ -227,8 +227,6 @@ void ModulePlayer::LevelSpawn2()
 // Update: draw background
 update_status ModulePlayer::Update(float dt)
 {
-	if(App->map->GetLevel() == 1) App->map->CreateCountDown(vec3(0, 0, 110), dt);
-	if(App->map->GetLevel() == 2) App->map->CreateCountDown(vec3(100, 0, 110), dt);
 
 	if (App->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
 	{

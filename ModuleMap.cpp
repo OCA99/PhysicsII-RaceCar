@@ -27,12 +27,16 @@ bool ModuleMap::Start()
 
 update_status ModuleMap::Update(float dt)
 {
+	if (level == 1) CreateCountDown(vec3(0, 0, 110), dt);
+	if (level == 2) CreateCountDown(vec3(100, 0, 110), dt);
+
 	p2List_item<Primitive*>* item = objects.getFirst();
 	while (item)
 	{
 		item->data->Render();
 		item = item->next;
 	}
+
 	return UPDATE_CONTINUE;
 }
 
@@ -176,9 +180,10 @@ void ModuleMap::CreateRectangles()
 	CreateRectangle({ 117,4.3f,46 }, { 0,0, 1, 1 }, { 20,0.3f,3 }, Red);
 	CreateRectangle({ 127,4.3f,46 }, { 0,0, 1, 1 }, { 5,0.3f,14 }, Red);
 	CreateRectangle({ 127,10.3f,62 }, { 60,1, 0, 0 }, { 3,25,0.3f }, Red);
+	CreateRectangle({ 127,15.3f,78 }, { 0,0, 0, 1 }, { 14,0.3f,5 }, Red);
 
 	CreateSensor({ 110,0,80.0f }, { 0,0, 0, 1 }, { 60,1,128 }, PhysSensor3D::Type::DEAD);/*MIDDLE*/
-
+	CreateSensor({ 127,15.3f,77 }, { 0,0, 0, 1 }, { 14,0.3,5 }, PhysSensor3D::Type::FINISH);/*FINISH*/
 
 	//------------------------END OF STAGE 2----------------------
 
