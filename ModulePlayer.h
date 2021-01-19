@@ -20,7 +20,7 @@ public:
 	bool CleanUp();
 	void LevelSpawn1();
 	void LevelSpawn2();
-
+	void LevelSpawn3();
 public:
 
 	PhysVehicle3D* vehicle;

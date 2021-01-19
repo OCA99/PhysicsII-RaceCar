@@ -29,6 +29,7 @@ update_status ModuleMap::Update(float dt)
 {
 	if (level == 1) CreateCountDown(vec3(0, 0, 110), dt);
 	if (level == 2) CreateCountDown(vec3(100, 0, 110), dt);
+	if (level == 3) CreateCountDown(vec3(-150, 0, 110), dt);
 
 	p2List_item<Primitive*>* item = objects.getFirst();
 	while (item)
@@ -99,7 +100,7 @@ bool ModuleMap::CleanUp()
 void ModuleMap::CreateRectangles()
 {
 	//Left
-	//---------------------STAGE 1------------------------------
+	//---------------------LEVEL 1------------------------------
 	// Walls
 	CreateRectangle({ 7,1,60.0f }, { 0,0,0,1 }, { 1,3.0f,120.0f }, Red);
 	CreateRectangle({ -38,1,60.0f }, { 0,0,0,1 }, { 1,3.0f,120.0f }, Red);
@@ -168,11 +169,10 @@ void ModuleMap::CreateRectangles()
 	CreateSensor({ 0,2,144.0f }, { 0,0, 0, 1 }, { 80,1,10 }, PhysSensor3D::Type::DEAD);/*TOP*/
 	CreateSensor({ 0,2,-23.0f }, { 0,0, 0, 1 }, { 80,1,10 }, PhysSensor3D::Type::DEAD);/*BOTTOM*/
 
+	//------------------------END OF LEVEL 1----------------------
 
+	//---------------------LEVEL 2------------------------------ 0,0,0 = 100,0, 0
 
-	//------------------------END OF STAGE 1----------------------
-
-	//---------------------STAGE 2------------------------------0,0,0= 100,0, 0
 	CreateRectangle({ 100,0,10 }, { 60,1, 0, 0 }, { 14,17,0.5f }, Red);
 	CreateRectangle({ 100,4.3f,20 }, { 0,0, 0, 1 }, { 14,0.3f,5 }, Red);
 	CreateRectangle({ 100,4.3f,32 }, { 0,0, 0, 1 }, { 3,0.3f,20 }, Red);
@@ -180,13 +180,23 @@ void ModuleMap::CreateRectangles()
 	CreateRectangle({ 117,4.3f,46 }, { 0,0, 1, 1 }, { 20,0.3f,3 }, Red);
 	CreateRectangle({ 127,4.3f,46 }, { 0,0, 1, 1 }, { 5,0.3f,14 }, Red);
 	CreateRectangle({ 127,10.3f,62 }, { 60,1, 0, 0 }, { 3,25,0.3f }, Red);
-	CreateRectangle({ 127,15.3f,78 }, { 0,0, 0, 1 }, { 14,0.3f,5 }, Red);
+	CreateRectangle({ 127,15.3f,84 }, { 0,0, 0, 1 }, { 14,0.3f,20 }, Red);
 
 	CreateSensor({ 110,0,80.0f }, { 0,0, 0, 1 }, { 60,1,128 }, PhysSensor3D::Type::DEAD);/*MIDDLE*/
-	CreateSensor({ 127,15.3f,77 }, { 0,0, 0, 1 }, { 14,0.3,5 }, PhysSensor3D::Type::FINISH);/*FINISH*/
+	CreateSensor({ 127,15.3f,84 }, { 0,0, 0, 1 }, { 14,0.3,20 }, PhysSensor3D::Type::FINISH);/*FINISH*/
 
-	//------------------------END OF STAGE 2----------------------
+	//------------------------END OF LEVEL 2----------------------
 
+	//---------------------LEVEL 3------------------------------0,0,0 = -100,0, 0
+
+	CreateRectangle({ -100,0,10 }, { 60,1, 0, 0 }, { 14,17,0.5f }, Red);
+	CreateRectangle({ -100,10,30 }, { 60,1, 0, 0 }, { 14,17,0.5f }, Red);
+	CreateRectangle({ -100,20,60 }, { 60,1, 0, 0 }, { 14,17,0.5f }, Red);
+	CreateRectangle({ -100,25,72 }, { 0,0, 0, 1 }, { 14,0.3f,5 }, Red);
+
+
+
+	//------------------------END OF LEVEL 3----------------------
 }
 
 int ModuleMap::GetLevel()
