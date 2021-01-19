@@ -108,7 +108,7 @@ void ModuleMap::CreateRectangles()
 
 	//DEAD SENSOR
 	CreateSensor({ 15,2,50.0f }, { 0,0, 0, 1 }, { 15,1,200 }, PhysSensor3D::Type::DEAD);/*LEFT*/
-	CreateSensor({ -15,2,60.0f }, { 0,0, 0, 1 }, { 15,1,120 }, PhysSensor3D::Type::DEAD);/*MIDDLE*/
+	CreateSensor({ -15,2,60.0f }, { 0,0, 0, 1 }, { 15,1,128 }, PhysSensor3D::Type::DEAD);/*MIDDLE*/
 	CreateSensor({ -46,2,50.0f }, { 0,0, 0, 1 }, { 15,1,200 }, PhysSensor3D::Type::DEAD);/*RIGHT*/
 	CreateSensor({ 0,2,144.0f }, { 0,0, 0, 1 }, { 80,1,10 }, PhysSensor3D::Type::DEAD);/*TOP*/
 	CreateSensor({ 0,2,-23.0f }, { 0,0, 0, 1 }, { 80,1,10 }, PhysSensor3D::Type::DEAD);/*BOTTOM*/
