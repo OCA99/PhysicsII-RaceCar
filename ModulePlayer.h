@@ -26,7 +26,10 @@ public:
 	PhysVehicle3D* trolley;
 	PhysVehicle3D* trolley2;
 
-	int doOnce = -1;
+	int doOnce = 1;
+	int canMove = -1;
+	bool boost = false;
+	float counter = 0;
 	float turn;
 	float acceleration;
 	float brake;

@@ -39,12 +39,12 @@ bool ModulePlayer::Start()
 
 	// Don't change anything below this line ------------------
 
-	float half_width = car.chassis_size.x*0.5f;
-	float half_length = car.chassis_size.z*0.5f;
-	
-	vec3 direction(0,-1,0);
-	vec3 axis(-1,0,0);
-	
+	float half_width = car.chassis_size.x * 0.5f;
+	float half_length = car.chassis_size.z * 0.5f;
+
+	vec3 direction(0, -1, 0);
+	vec3 axis(-1, 0, 0);
+
 	car.num_wheels = 4;
 	car.wheels = new Wheel[4];
 
@@ -198,43 +198,46 @@ update_status ModulePlayer::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
 	{
 		laps++;
-		doOnce *= -1;
 	}
-	if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+	if (canMove > 0)
 	{
-		if (vehicle->GetKmh() < -1.0f)
+		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 		{
-			brake = BRAKE_POWER;
+			if (vehicle->GetKmh() < -1.0f)
+			{
+				brake = BRAKE_POWER;
+			}
+			else
+			{
+				acceleration = MAX_ACCELERATION;
+			}
 		}
-		else
+
+		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 		{
-			acceleration = MAX_ACCELERATION;
+			if (turn < TURN_DEGREES)
+				turn += TURN_DEGREES;
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+		{
+			if (turn > -TURN_DEGREES)
+				turn -= TURN_DEGREES;
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+		{
+			if (vehicle->GetKmh() > 1.0f)
+			{
+				brake = BRAKE_POWER;
+			}
+			else
+			{
+				acceleration = -MAX_ACCELERATION;
+			}
 		}
 	}
 
-	if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-	{
-		if(turn < TURN_DEGREES)
-			turn +=  TURN_DEGREES;
-	}
-
-	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-	{
-		if(turn > -TURN_DEGREES)
-			turn -= TURN_DEGREES;
-	}
-
-	if(App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-	{
-		if (vehicle->GetKmh() > 1.0f)
-		{
-			brake = BRAKE_POWER;
-		}
-		else
-		{
-			acceleration = -MAX_ACCELERATION;
-		}
-	}
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
@@ -251,75 +254,101 @@ update_status ModulePlayer::Update(float dt)
 	//trolley2->Render();
 
 	char title[80];
-	sprintf_s(title, "%.1f Km/h  Laps: %i", vehicle->GetKmh(),this->laps);
+	sprintf_s(title, "%.1f Km/h  Laps: %i", vehicle->GetKmh(), this->laps);
 	App->window->SetTitle(title);
-
-	if(doOnce > 0)
+	if (doOnce > 0)
 	{
-		switch (laps)
+		if (counter > 3)
 		{
-		case 1:
-		{
-			//vehicle->info.chassis_size.Set(1.8, 1.1f, 4);
-			//vehicle->info.chassis_offset.Set(0, 1.5, 0);
-			//vehicle->info.mass = 500.0f;
-			//vehicle->info.suspensionStiffness = 10.0f;
-			//vehicle->info.suspensionCompression = 1.0f;
-			//vehicle->info.suspensionDamping = 0.88f;
-			//vehicle->info.maxSuspensionTravelCm = 1000.0f;
-			//vehicle->info.frictionSlip = 50.5;
-			//vehicle->info.maxSuspensionForce = 6000.0f;
-
 			//Text ONE
 			App->map->CreateRectangle({ 0,10,170.0f }, { 0,0,0,1 }, { 1,8.0f,1 }, White);
 			App->map->CreateRectangle({ 0.8f,12,170.0f }, { 30,0,0,1 }, { 1,3.0f,1 }, White);
-			break;
-		}
-		case 2:
-		{
-			//vehicle->info.chassis_size.Set(1.8, 1.1f, 6);
-			//vehicle->info.chassis_offset.Set(0, 1.5, 0);
-			//vehicle->info.mass = 1000.0f;
-			//vehicle->info.suspensionStiffness = 100.0f;
-			//vehicle->info.suspensionCompression = 100.f;
-			//vehicle->info.suspensionDamping = 8.0f;
-			//vehicle->info.maxSuspensionTravelCm = 1000.0f;
-			//vehicle->info.frictionSlip = 50.5;
-			//vehicle->info.maxSuspensionForce = 6000.0f;
+			doOnce *= -1;
+			if (boost)
+			{
+				for (int i = 0; i < 5000; ++i)
+				{
+					acceleration = MAX_ACCELERATION * 100000;
+					vehicle->ApplyEngineForce(acceleration );
+				}
+			}
+			canMove *= -1;
 
+		}
+		if (counter > 2)
+		{
 			//Text TWO
 			App->map->CreateRectangle({ -8,13,170.0f }, { 0,0,0,1 }, { 5,1,1 }, Green);
 			App->map->CreateRectangle({ -10,12,170.0f }, { 90,0,0,1 }, { 3,1,1 }, Green);
 			App->map->CreateRectangle({ -8,10,170.0f }, { 0,0,0,1 }, { 5,1,1 }, Green);
 			App->map->CreateRectangle({ -6,9,170.0f }, { 90,0,0,1 }, { 3,1,1 }, Green);
 			App->map->CreateRectangle({ -8,7,170.0f }, { 0,0,0,1 }, { 5,1,1 }, Green);
-			break;
+			if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+			{
+				boost = true;
+			}
 		}
-		case 3:
+		if (counter > 1)
 		{
-			//vehicle->info.chassis_size.Set(1.8, 1.1f, 2);
-			//vehicle->info.chassis_offset.Set(0, 1.5, 10);
-			//vehicle->info.mass = 500.0f;
-			//vehicle->info.suspensionStiffness = 10.f;
-			//vehicle->info.suspensionCompression = 1.f;
-			//vehicle->info.suspensionDamping = 0.88f;
-			//vehicle->info.maxSuspensionTravelCm = 300.0f;
-			//vehicle->info.frictionSlip = 50.5;
-			//vehicle->info.maxSuspensionForce = 6000.0f;
-
 			//Text THREE
 			App->map->CreateRectangle({ -18,13,170.0f }, { 0,0,0,1 }, { 5,1,1 }, Red);
 			App->map->CreateRectangle({ -20,12,170.0f }, { 90,0,0,1 }, { 3,1,1 }, Red);
 			App->map->CreateRectangle({ -18,10,170.0f }, { 0,0,0,1 }, { 5,1,1 }, Red);
 			App->map->CreateRectangle({ -20,9,170.0f }, { 90,0,0,1 }, { 3,1,1 }, Red);
 			App->map->CreateRectangle({ -18,7,170.0f }, { 0,0,0,1 }, { 5,1,1 }, Red);
-			break;
 		}
-		default:
-			break;
-		}
+		counter += dt;
 
-		doOnce *= -1;
+
+	}
+
+	switch (laps)
+	{
+	case 1:
+	{
+		//vehicle->info.chassis_size.Set(1.8, 1.1f, 4);
+		//vehicle->info.chassis_offset.Set(0, 1.5, 0);
+		//vehicle->info.mass = 500.0f;
+		//vehicle->info.suspensionStiffness = 10.0f;
+		//vehicle->info.suspensionCompression = 1.0f;
+		//vehicle->info.suspensionDamping = 0.88f;
+		//vehicle->info.maxSuspensionTravelCm = 1000.0f;
+		//vehicle->info.frictionSlip = 50.5;
+		//vehicle->info.maxSuspensionForce = 6000.0f;
+
+		break;
+	}
+	case 2:
+	{
+		//vehicle->info.chassis_size.Set(1.8, 1.1f, 6);
+		//vehicle->info.chassis_offset.Set(0, 1.5, 0);
+		//vehicle->info.mass = 1000.0f;
+		//vehicle->info.suspensionStiffness = 100.0f;
+		//vehicle->info.suspensionCompression = 100.f;
+		//vehicle->info.suspensionDamping = 8.0f;
+		//vehicle->info.maxSuspensionTravelCm = 1000.0f;
+		//vehicle->info.frictionSlip = 50.5;
+		//vehicle->info.maxSuspensionForce = 6000.0f;
+
+		break;
+	}
+	case 3:
+	{
+		//vehicle->info.chassis_size.Set(1.8, 1.1f, 2);
+		//vehicle->info.chassis_offset.Set(0, 1.5, 10);
+		//vehicle->info.mass = 500.0f;
+		//vehicle->info.suspensionStiffness = 10.f;
+		//vehicle->info.suspensionCompression = 1.f;
+		//vehicle->info.suspensionDamping = 0.88f;
+		//vehicle->info.maxSuspensionTravelCm = 300.0f;
+		//vehicle->info.frictionSlip = 50.5;
+		//vehicle->info.maxSuspensionForce = 6000.0f;
+
+
+		break;
+	}
+	default:
+		break;
 	}
 	return UPDATE_CONTINUE;
 }
