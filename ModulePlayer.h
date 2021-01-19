@@ -27,14 +27,8 @@ public:
 	PhysVehicle3D* trolley;
 	PhysVehicle3D* trolley2;
 
-	//Checkes
-	bool one = false;
-	bool two = false;
-	bool three = false;
+	bool canMove = false;
 
-	int canMove = -1;
-	bool boost = false;
-	float counter = 0;
 	float turn;
 	float acceleration;
 	float brake;

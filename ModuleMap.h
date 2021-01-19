@@ -16,6 +16,7 @@ public:
 	bool CleanUp();
 
 	void CreateRectangles();
+	void CreateCountDown(vec3 pos, float dt);
 	void NextLevel();
 	int GetLevel();
 
@@ -24,6 +25,13 @@ public:
 
 
 private:
+	//Countdown Checkers
+	float counter = 0;
+	bool one = false;
+	bool two = false;
+	bool three = false;
+
+
 	p2List<Primitive*> objects;
 	int level = 1;
 };

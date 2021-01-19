@@ -1,6 +1,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleMap.h"
+#include "ModulePlayer.h"
 #include "Primitive.h"
 #include "PhysBody3D.h"
 
@@ -38,6 +39,51 @@ update_status ModuleMap::Update(float dt)
 void ModuleMap::NextLevel()
 {
 	level++;
+}
+
+void ModuleMap::CreateCountDown(vec3 pos, float dt)
+{
+	if (App->player->laps == 3)
+	{
+		counter = 0;
+		App->player->canMove = false;
+		one = false;
+		two = false;
+		three = false;
+	}
+
+	if ((int)counter == 3 && !one)
+	{
+		//Text ONE
+		App->map->CreateRectangle({ pos.x,pos.y + 10,pos.z }, { 0,0,0,1 }, { 1,8.0f,1 }, White);
+		App->map->CreateRectangle({ pos.x + 0.8f,pos.y + 12,pos.z }, { 30,0,0,1 }, { 1,3.0f,1 }, White);
+
+		App->player->canMove = true;;
+		one = true;
+
+	}
+	else if ((int)counter == 2 && !one && !two)
+	{
+		//Text TWO
+		CreateRectangle({ pos.x - 8,pos.y + 13,pos.z }, { 0,0,0,1 }, { 5,1,1 }, Green);
+		CreateRectangle({ pos.x - 10,pos.y + 12,pos.z }, { 90,0,0,1 }, { 3,1,1 }, Green);
+		CreateRectangle({ pos.x - 8,pos.y + 10,pos.z }, { 0,0,0,1 }, { 5,1,1 }, Green);
+		CreateRectangle({ pos.x - 6,pos.y + 9,pos.z }, { 90,0,0,1 }, { 3,1,1 }, Green);
+		CreateRectangle({ pos.x - 8,pos.y + 7,pos.z }, { 0,0,0,1 }, { 5,1,1 }, Green);
+
+		two = true;
+	}
+	else if ((int)counter == 1 && !one && !three)
+	{
+		//Text THREE
+		App->map->CreateRectangle({ pos.x - 18,pos.y + 13,pos.z }, { 0,0,0,1 }, { 5,1,1 }, Red);
+		App->map->CreateRectangle({ pos.x - 20,pos.y + 12,pos.z }, { 90,0,0,1 }, { 3,1,1 }, Red);
+		App->map->CreateRectangle({ pos.x - 18,pos.y + 10,pos.z }, { 0,0,0,1 }, { 5,1,1 }, Red);
+		App->map->CreateRectangle({ pos.x - 20,pos.y + 9,pos.z }, { 90,0,0,1 }, { 3,1,1 }, Red);
+		App->map->CreateRectangle({ pos.x - 18,pos.y + 7,pos.z }, { 0,0,0,1 }, { 5,1,1 }, Red);
+		three = true;
+	}
+	else if (!one) counter += dt;
 }
 
 bool ModuleMap::CleanUp()
@@ -129,7 +175,7 @@ void ModuleMap::CreateRectangles()
 	CreateRectangle({ 100,4.3f,46 }, { 0,0, 0, 1 }, { 14,0.3f,9 }, Red);
 	CreateRectangle({ 117,4.3f,46 }, { 0,0, 1, 1 }, { 20,0.3f,3 }, Red);
 	CreateRectangle({ 127,4.3f,46 }, { 0,0, 1, 1 }, { 5,0.3f,14 }, Red);
-	CreateRectangle({ 127,10.3f,62}, { 60,1, 0, 0 }, { 3,25,0.3f }, Red);
+	CreateRectangle({ 127,10.3f,62 }, { 60,1, 0, 0 }, { 3,25,0.3f }, Red);
 
 	CreateSensor({ 110,0,80.0f }, { 0,0, 0, 1 }, { 60,1,128 }, PhysSensor3D::Type::DEAD);/*MIDDLE*/
 
