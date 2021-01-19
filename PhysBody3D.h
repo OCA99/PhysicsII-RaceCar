@@ -36,7 +36,8 @@ public:
 	enum class Type
 	{
 		FINISH,
-		LAP
+		LAP,
+		DEAD
 	};
 
 	PhysSensor3D(btRigidBody* body, Type _type);

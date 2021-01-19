@@ -106,6 +106,14 @@ void ModuleMap::CreateRectangles()
 	CreateSensor({ -30,0,80.0f }, { 0,1, 0, 0 }, { 14,10,0.5f }, PhysSensor3D::Type::LAP);
 	CreateSensor({ 0,0,60.0f }, { 0,1, 0, 0 }, { 14,10,0.5f }, PhysSensor3D::Type::FINISH);
 
+	//DEAD SENSOR
+	CreateSensor({ 15,2,50.0f }, { 0,0, 0, 1 }, { 15,1,200 }, PhysSensor3D::Type::DEAD);/*LEFT*/
+	CreateSensor({ -15,2,60.0f }, { 0,0, 0, 1 }, { 15,1,120 }, PhysSensor3D::Type::DEAD);/*MIDDLE*/
+	CreateSensor({ -46,2,50.0f }, { 0,0, 0, 1 }, { 15,1,200 }, PhysSensor3D::Type::DEAD);/*RIGHT*/
+	CreateSensor({ 0,2,144.0f }, { 0,0, 0, 1 }, { 80,1,10 }, PhysSensor3D::Type::DEAD);/*TOP*/
+	CreateSensor({ 0,2,-23.0f }, { 0,0, 0, 1 }, { 80,1,10 }, PhysSensor3D::Type::DEAD);/*BOTTOM*/
+
+
 
 	//------------------------END OF STAGE 1----------------------
 
