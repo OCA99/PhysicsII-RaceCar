@@ -116,8 +116,12 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 						App->player->doOnce *= -1;
 						App->player->lap = false;
 					}
-				}
 					break;
+				}
+				case PhysSensor3D::Type::DEAD:
+				{
+					App->player->Reset();
+				}
 				default:
 					break;
 				}
