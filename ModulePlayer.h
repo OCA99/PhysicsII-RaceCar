@@ -25,7 +25,8 @@ public:
 	PhysVehicle3D* vehicle;
 	PhysVehicle3D* trolley;
 	PhysVehicle3D* trolley2;
-	
+
+	int doOnce = -1;
 	float turn;
 	float acceleration;
 	float brake;
