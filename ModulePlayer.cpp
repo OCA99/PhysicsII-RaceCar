@@ -265,7 +265,7 @@ update_status ModulePlayer::Update(float dt)
 	turn = acceleration = brake = 0.0f;
 	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
 	{
-		laps++;
+		laps = 3;
 	}
 	if (canMove)
 	{
@@ -381,6 +381,11 @@ update_status ModulePlayer::Update(float dt)
 		{
 			LevelSpawn3();
 			App->map->CreateCountDown(vec3(-150, 0, 110), dt);
+		}
+		case 4:
+		{
+			LevelSpawn3();
+			App->map->CreateCountDown(vec3(-180, 0, 110), dt);
 		}
 		default:
 			break;
