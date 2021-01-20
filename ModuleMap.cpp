@@ -64,7 +64,7 @@ void ModuleMap::CreateCountDown(vec3 pos, float dt)
 		App->map->CreateRectangle({ pos.x,pos.y + 10,pos.z }, { 0,0,0,1 }, { 1,8.0f,1 }, White);
 		App->map->CreateRectangle({ pos.x + 0.8f,pos.y + 12,pos.z }, { 30,0,0,1 }, { 1,3.0f,1 }, White);
 
-		App->player->canMove = true;;
+		App->player->canMove = true;
 		one = true;
 
 	}
