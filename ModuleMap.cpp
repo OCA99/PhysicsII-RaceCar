@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleMap.h"
 #include "ModulePlayer.h"
+#include "ModulePhysics3D.h"
 #include "Primitive.h"
 #include "PhysBody3D.h"
 
@@ -30,6 +31,7 @@ update_status ModuleMap::Update(float dt)
 	if (level == 1) CreateCountDown(vec3(0, 0, 110), dt);
 	if (level == 2) CreateCountDown(vec3(100, 0, 110), dt);
 	if (level == 3) CreateCountDown(vec3(-150, 0, 110), dt);
+	if (level == 4) CreateCountDown(vec3(-180, 0, 110), dt);
 
 	p2List_item<Primitive*>* item = objects.getFirst();
 	while (item)
@@ -182,7 +184,7 @@ void ModuleMap::CreateRectangles()
 	CreateRectangle({ 127,10.3f,62 }, { 60,1, 0, 0 }, { 3,25,0.3f }, Red);
 	CreateRectangle({ 127,15.3f,84 }, { 0,0, 0, 1 }, { 14,0.3f,20 }, Red);
 
-	CreateSensor({ 110,0,80.0f }, { 0,0, 0, 1 }, { 60,1,128 }, PhysSensor3D::Type::DEAD);/*MIDDLE*/
+	CreateSensor({ 110,0,80.0f }, { 0,0, 0, 1 }, { 60,1,100 }, PhysSensor3D::Type::DEAD);/*MIDDLE*/
 	CreateSensor({ 127,15.3f,84 }, { 0,0, 0, 1 }, { 14,0.3,20 }, PhysSensor3D::Type::FINISH);/*FINISH*/
 
 	//------------------------END OF LEVEL 2----------------------
@@ -192,9 +194,17 @@ void ModuleMap::CreateRectangles()
 	CreateRectangle({ -100,0,10 }, { 60,1, 0, 0 }, { 14,17,0.5f }, Red);
 	CreateRectangle({ -100,10,30 }, { 60,1, 0, 0 }, { 14,17,0.5f }, Red);
 	CreateRectangle({ -100,20,60 }, { 60,1, 0, 0 }, { 14,17,0.5f }, Red);
-	CreateRectangle({ -100,25,72 }, { 0,0, 0, 1 }, { 14,0.3f,5 }, Red);
+	CreateRectangle({ -100,24.3,72 }, { 0,0, 0, 1 }, { 14,0.3f,10 }, Red);
+	CreateRectangle({ -100,24.3,82 }, { 0,0, 0, 1 }, { 3,0.3f,20 }, Red);
+	CreateRectangle({ -100,14,110 }, { 0,0, 0, 1 }, { 14,0.3f,10 }, Red);
+	CreateRectangle({ -100,20.3,125 }, { 60,1, 0, 0 }, { 3,25,0.3f }, Red);
+	CreateRectangle({ -100,20.3,146 }, { 300,1, 0, 0 }, { 3,25,0.3f }, Red);
+	CreateRectangle({ -100,14,160 }, { 0,0, 0, 1 }, { 14,0.3f,10 }, Red);
+	//CreateRectangle({ -110,10.3f,163 }, { 340,0, 0, 1 }, { 0.3f,10,3 }, Red);
+	CreateRectangle({ -110,5,160 }, { 0,0, 0, 1 }, { 14,0.3f,10 }, Red);
 
-
+	CreateSensor({ -95,0,80.0f }, { 0,0, 0, 1 }, { 60,1,130 }, PhysSensor3D::Type::DEAD);/*MIDDLE*/
+	CreateSensor({ -110,5,160 }, { 0,0, 0, 1 }, { 14,0.3f,20 }, PhysSensor3D::Type::FINISH);/*FINISH*/
 
 	//------------------------END OF LEVEL 3----------------------
 }
