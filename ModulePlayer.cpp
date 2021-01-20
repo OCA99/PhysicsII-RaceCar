@@ -266,7 +266,7 @@ void ModulePlayer::LevelSpawn4()
 	vehicle->GetTransform(&carMatrix);
 
 	carMatrix.rotate(0, { 0, 1, 0 });
-	carMatrix.translate(-3, 2, -110);
+	carMatrix.translate(-3, 1.5, -110);
 
 	vehicle->SetTransform(&carMatrix.M[0]);
 
@@ -282,17 +282,6 @@ void ModulePlayer::LevelSpawn4()
 
 	trolley->vehicle->getRigidBody()->setLinearVelocity({ 0, 0, 0 });
 	trolley->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });
-
-
-	//trolley2->GetTransform(&carMatrix);
-
-	//carMatrix.rotate(0, { 0, 1, 0 });
-	//carMatrix.translate(0, 1, 6);
-
-	//trolley2->SetTransform(&carMatrix.M[0]);
-
-	//trolley2->vehicle->getRigidBody()->setLinearVelocity({ 0, 0, 0 });
-	//trolley2->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });
 }
 
 // Update: draw background
