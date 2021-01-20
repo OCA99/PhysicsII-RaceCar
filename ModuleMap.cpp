@@ -31,7 +31,6 @@ update_status ModuleMap::Update(float dt)
 	if (level == 1) CreateCountDown(vec3(0, 0, 110), dt);
 	if (level == 2) CreateCountDown(vec3(100, 0, 110), dt);
 	if (level == 3) CreateCountDown(vec3(-150, 0, 110), dt);
-	if (level == 4) CreateCountDown(vec3(-180, 0, 110), dt);
 
 	p2List_item<Primitive*>* item = objects.getFirst();
 	while (item)
@@ -207,6 +206,23 @@ void ModuleMap::CreateRectangles()
 	CreateSensor({ -110,5,160 }, { 0,0, 0, 1 }, { 14,0.3f,20 }, PhysSensor3D::Type::FINISH);/*FINISH*/
 
 	//------------------------END OF LEVEL 3----------------------
+
+	//------------------------END OF LEVEL 4 = GG ---------------------- 0,0,0 = 0,0,-100
+
+	App->map->CreateRectangle({ 0,6,-90}, { 0,0,0,1 }, { 5,1,1 }, Red);
+	App->map->CreateRectangle({ 2, 5,-90 }, { 90,0,0,1 }, { 3,1,1 }, Red);
+	App->map->CreateRectangle({ -1.6f,3,-90 }, { 0,0,0,1 }, { 1,1,1 }, Red);
+	App->map->CreateRectangle({ 2, 2,-90 }, { 90,0,0,1 }, { 3,1,1 }, Red);
+	App->map->CreateRectangle({ -2, 2,-90 }, { 90,0,0,1 }, { 3,1,1 }, Red);
+	App->map->CreateRectangle({ 0, 0,-90 }, { 0,0,0,1 }, { 5,1,1 }, Red);
+
+	App->map->CreateRectangle({ -6,6,-90 }, { 0,0,0,1 }, { 5,1,1 }, Red);
+	App->map->CreateRectangle({ -4, 5,-90 }, { 90,0,0,1 }, { 3,1,1 }, Red);
+	App->map->CreateRectangle({ -7.6f,3,-90 }, { 0,0,0,1 }, { 1,1,1 }, Red);
+	App->map->CreateRectangle({ -4, 2,-90 }, { 90,0,0,1 }, { 3,1,1 }, Red);
+	App->map->CreateRectangle({ -8, 2,-90 }, { 90,0,0,1 }, { 3,1,1 }, Red);
+	App->map->CreateRectangle({ -6, 0,-90 }, { 0,0,0,1 }, { 5,1,1 }, Red);
+	//------------------------END OF LEVEL 4 = GG ----------------------
 }
 
 int ModuleMap::GetLevel()

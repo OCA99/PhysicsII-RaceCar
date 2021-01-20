@@ -21,6 +21,7 @@ public:
 	void LevelSpawn1();
 	void LevelSpawn2();
 	void LevelSpawn3();
+	void LevelSpawn4();
 public:
 
 	PhysVehicle3D* vehicle;
