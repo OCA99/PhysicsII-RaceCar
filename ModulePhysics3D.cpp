@@ -125,10 +125,12 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 					case 2:
 					{
 						App->player->laps = 3;
+						break;
 					}
 					case 3:
 					{
 						App->player->laps = 3;
+						break;
 					}
 					default:
 						break;
@@ -140,8 +142,9 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 				{
 					if (App->map->GetLevel() == 1) App->player->LevelSpawn1();
 					if (App->map->GetLevel() == 2) App->player->LevelSpawn2();
-					if(App->map->GetLevel() == 3) App->player->LevelSpawn3();
-					
+					if (App->map->GetLevel() == 3) App->player->LevelSpawn3();
+					if(App->map->GetLevel() == 4) App->player->LevelSpawn4();
+					break;
 				}
 				default:
 					break;
