@@ -23,6 +23,7 @@ bool ModuleMap::Start()
 	//Create Map
 	CreateRectangles();
 
+
 	return ret;
 }
 
@@ -35,9 +36,14 @@ update_status ModuleMap::Update(float dt)
 	p2List_item<Primitive*>* item = objects.getFirst();
 	while (item)
 	{
-		item->data->Render();
+		if(item->data->render == true)
+			item->data->Render();
+
 		item = item->next;
 	}
+
+	App->physics->retDebug()->draw3dText({ 0,2,15 }, "Hello World!");
+
 
 	return UPDATE_CONTINUE;
 }
@@ -61,8 +67,8 @@ void ModuleMap::CreateCountDown(vec3 pos, float dt)
 	if ((int)counter == 3 && !one)
 	{
 		//Text ONE
-		App->map->CreateRectangle({ pos.x,pos.y + 10,pos.z }, { 0,0,0,1 }, { 1,8.0f,1 }, White);
-		App->map->CreateRectangle({ pos.x + 0.8f,pos.y + 12,pos.z }, { 30,0,0,1 }, { 1,3.0f,1 }, White);
+		oneObj[1] = App->map->CreateRectangle({ pos.x,pos.y + 10,pos.z }, { 0,0,0,1 }, { 1,8.0f,1 }, White);
+		oneObj[2] = App->map->CreateRectangle({ pos.x + 0.8f,pos.y + 12,pos.z }, { 30,0,0,1 }, { 1,3.0f,1 }, White);
 
 		App->player->canMove = true;
 		one = true;
@@ -71,22 +77,22 @@ void ModuleMap::CreateCountDown(vec3 pos, float dt)
 	else if ((int)counter == 2 && !one && !two)
 	{
 		//Text TWO
-		CreateRectangle({ pos.x - 8,pos.y + 13,pos.z }, { 0,0,0,1 }, { 5,1,1 }, Green);
-		CreateRectangle({ pos.x - 10,pos.y + 12,pos.z }, { 90,0,0,1 }, { 3,1,1 }, Green);
-		CreateRectangle({ pos.x - 8,pos.y + 10,pos.z }, { 0,0,0,1 }, { 5,1,1 }, Green);
-		CreateRectangle({ pos.x - 6,pos.y + 9,pos.z }, { 90,0,0,1 }, { 3,1,1 }, Green);
-		CreateRectangle({ pos.x - 8,pos.y + 7,pos.z }, { 0,0,0,1 }, { 5,1,1 }, Green);
+		twoObj[1] = CreateRectangle({ pos.x - 8,pos.y + 13,pos.z }, { 0,0,0,1 }, { 5,1,1 }, Green);
+		twoObj[2] = CreateRectangle({ pos.x - 10,pos.y + 12,pos.z }, { 90,0,0,1 }, { 3,1,1 }, Green);
+		twoObj[3] = CreateRectangle({ pos.x - 8,pos.y + 10,pos.z }, { 0,0,0,1 }, { 5,1,1 }, Green);
+		twoObj[4] = CreateRectangle({ pos.x - 6,pos.y + 9,pos.z }, { 90,0,0,1 }, { 3,1,1 }, Green);
+		twoObj[5] = CreateRectangle({ pos.x - 8,pos.y + 7,pos.z }, { 0,0,0,1 }, { 5,1,1 }, Green);
 
 		two = true;
 	}
 	else if ((int)counter == 1 && !one && !three)
 	{
 		//Text THREE
-		App->map->CreateRectangle({ pos.x - 18,pos.y + 13,pos.z }, { 0,0,0,1 }, { 5,1,1 }, Red);
-		App->map->CreateRectangle({ pos.x - 20,pos.y + 12,pos.z }, { 90,0,0,1 }, { 3,1,1 }, Red);
-		App->map->CreateRectangle({ pos.x - 18,pos.y + 10,pos.z }, { 0,0,0,1 }, { 5,1,1 }, Red);
-		App->map->CreateRectangle({ pos.x - 20,pos.y + 9,pos.z }, { 90,0,0,1 }, { 3,1,1 }, Red);
-		App->map->CreateRectangle({ pos.x - 18,pos.y + 7,pos.z }, { 0,0,0,1 }, { 5,1,1 }, Red);
+		threeObj[1] = App->map->CreateRectangle({ pos.x - 18,pos.y + 13,pos.z }, { 0,0,0,1 }, { 5,1,1 }, Red);
+		threeObj[2] = App->map->CreateRectangle({ pos.x - 20,pos.y + 12,pos.z }, { 90,0,0,1 }, { 3,1,1 }, Red);
+		threeObj[3] = App->map->CreateRectangle({ pos.x - 18,pos.y + 10,pos.z }, { 0,0,0,1 }, { 5,1,1 }, Red);
+		threeObj[4] = App->map->CreateRectangle({ pos.x - 20,pos.y + 9,pos.z }, { 90,0,0,1 }, { 3,1,1 }, Red);
+		threeObj[5] = App->map->CreateRectangle({ pos.x - 18,pos.y + 7,pos.z }, { 0,0,0,1 }, { 5,1,1 }, Red);
 		three = true;
 	}
 	else if (!one) counter += dt;
@@ -223,6 +229,7 @@ void ModuleMap::CreateRectangles()
 	App->map->CreateRectangle({ -8, 2,-90 }, { 90,0,0,1 }, { 3,1,1 }, Red);
 	App->map->CreateRectangle({ -6, 0,-90 }, { 0,0,0,1 }, { 5,1,1 }, Red);
 	//------------------------END OF LEVEL 4 = GG ----------------------
+
 }
 
 int ModuleMap::GetLevel()

@@ -1,8 +1,11 @@
 #pragma once
 #include "Module.h"
 #include "Globals.h"
+#include "ModulePhysics3D.h"
 
 struct PhysBody3D;
+
+#define MAX_OBJECTS 20;
 
 class ModuleMap : public Module
 {
@@ -22,6 +25,11 @@ public:
 
 	PhysBody3D* CreateRectangle(vec3 position, vec4 rotation, vec3 size, Color s_color, float mass = 0.0f);
 	PhysSensor3D* CreateSensor(vec3 position, vec4 rotation, vec3 size,PhysSensor3D::Type type, float mass = 0.0f);
+
+	PhysBody3D* oneObj[20] = { nullptr };
+	PhysBody3D* twoObj[20] = { nullptr };
+	PhysBody3D* threeObj[20] = { nullptr };
+
 
 
 private:
