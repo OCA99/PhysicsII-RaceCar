@@ -36,4 +36,5 @@ public:
 	float brake;
 	bool lap = false;
 	int laps = 3; 
+	int lifes = 3;
 };
