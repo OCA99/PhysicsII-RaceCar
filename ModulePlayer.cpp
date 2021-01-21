@@ -372,7 +372,7 @@ update_status ModulePlayer::Update(float dt)
 	//trolley2->Render();
 
 	char title[80];
-	sprintf_s(title, "%.1f Km/h  Laps: %i Level: %d", vehicle->GetKmh(), this->laps, App->map->GetLevel());
+	sprintf_s(title, "%.1f Km/h  Laps: %i Level: %d Lifes: %d", vehicle->GetKmh(), this->laps, App->map->GetLevel(),lifes);
 	App->window->SetTitle(title);
 
 	//CHECKPOINTS
@@ -398,26 +398,28 @@ update_status ModulePlayer::Update(float dt)
 		{
 		case 1:
 		{
-	
 			App->map->CountDownSetPos(vec3(0, 0, 110), dt);
-
+			lifes = 3;
 			break;
 		}
 		case 2:
 		{
 			LevelSpawn2();
 			App->map->CountDownSetPos(vec3(100, 0, 110), dt);
+			lifes = 3;
 			break;
 		}
 		case 3:
 		{
 			LevelSpawn3();
 			App->map->CountDownSetPos(vec3(-150, 0, 110), dt);
+			lifes = 3;
 			break;
 		}
 		case 4:
 		{
 			LevelSpawn4();
+			lifes = 100;
 			break;
 		}
 		default:
