@@ -266,7 +266,7 @@ void ModulePlayer::LevelSpawn4()
 	vehicle->GetTransform(&carMatrix);
 
 	carMatrix.rotate(0, { 0, 1, 0 });
-	carMatrix.translate(-3, 1.5, -110);
+	carMatrix.translate(-3, 2, -110);
 
 	vehicle->SetTransform(&carMatrix.M[0]);
 
