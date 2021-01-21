@@ -20,6 +20,7 @@ public:
 	void SetTransform(const float* matrix) const;
 	void SetPos(float x, float y, float z);
 	bool IsSensor() { return is_sensor; };
+	void isDraw();
 
 protected:
 	btRigidBody* body = nullptr;
@@ -27,6 +28,7 @@ protected:
 public:
 	p2List<Module*> collision_listeners;
 	bool is_sensor;
+	bool isRender = true;
 };
 
 struct PhysSensor3D : public PhysBody3D

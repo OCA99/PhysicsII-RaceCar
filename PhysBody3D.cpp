@@ -49,6 +49,15 @@ void PhysBody3D::SetPos(float x, float y, float z)
 
 }
 
+void PhysBody3D::isDraw()
+{
+	if(this->isRender == true)
+		body->setCollisionFlags(body->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
+
+	if (this->isRender == false)
+		body->setCollisionFlags(body->getCollisionFlags() & ~btCollisionObject::CF_NO_CONTACT_RESPONSE);
+}
+
 PhysSensor3D::~PhysSensor3D()
 {
 	delete body;
