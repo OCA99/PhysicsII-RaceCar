@@ -5,7 +5,7 @@
 
 struct PhysBody3D;
 
-#define MAX_OBJECTS 20;
+#define OBJECTS 20
 
 class ModuleMap : public Module
 {
@@ -19,20 +19,21 @@ public:
 	bool CleanUp();
 
 	void CreateRectangles();
-	void CreateCountDown(vec3 pos, float dt);
+	void CountDownSetPos(vec3 pos, float dt);
+	void CreateCountDown();
+	void ResetCountDown();
 	void NextLevel();
 	int GetLevel();
 
-	PhysBody3D* CreateRectangle(vec3 position, vec4 rotation, vec3 size, Color s_color, float mass = 0.0f);
+	Primitive* CreateRectangle(vec3 position, vec4 rotation, vec3 size, Color s_color, float mass = 0.0f,bool render = true, bool countDown = false);
 	PhysSensor3D* CreateSensor(vec3 position, vec4 rotation, vec3 size,PhysSensor3D::Type type, float mass = 0.0f);
 
-	PhysBody3D* oneObj[20] = { nullptr };
-	PhysBody3D* twoObj[20] = { nullptr };
-	PhysBody3D* threeObj[20] = { nullptr };
-
-
+	Primitive* oneObj[OBJECTS] = { nullptr };
+	Primitive* twoObj[OBJECTS] = { nullptr };
+	Primitive* threeObj[OBJECTS] = { nullptr };
 
 private:
+
 	//Countdown Checkers
 	float counter = 0;
 	bool one = false;
@@ -41,5 +42,5 @@ private:
 
 
 	p2List<Primitive*> objects;
-	int level = 1;
+	int level = 0;
 };

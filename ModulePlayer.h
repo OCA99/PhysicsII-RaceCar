@@ -29,11 +29,11 @@ public:
 	PhysVehicle3D* trolley;
 	PhysVehicle3D* trolley2;
 
-	bool canMove = false;
+	bool canMove = true;
 
 	float turn;
 	float acceleration;
 	float brake;
 	bool lap = false;
-	int laps = 0; 
+	int laps = 3; 
 };

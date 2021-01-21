@@ -393,24 +393,26 @@ update_status ModulePlayer::Update(float dt)
 	case 3:
 	{
 		App->map->NextLevel();
+		App->map->ResetCountDown();
 		switch (App->map->GetLevel())
 		{
 		case 1:
 		{
-			//vec3 p(110, 0, 110);
+	
+			App->map->CountDownSetPos(vec3(0, 0, 110), dt);
 
 			break;
 		}
 		case 2:
 		{
 			LevelSpawn2();
-			App->map->CreateCountDown(vec3(100, 0, 110), dt);
+			App->map->CountDownSetPos(vec3(100, 0, 110), dt);
 			break;
 		}
 		case 3:
 		{
 			LevelSpawn3();
-			App->map->CreateCountDown(vec3(-150, 0, 110), dt);
+			App->map->CountDownSetPos(vec3(-150, 0, 110), dt);
 			break;
 		}
 		case 4:
