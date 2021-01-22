@@ -35,6 +35,7 @@ public:
 	Primitive* threeObj[OBJECTS] = { nullptr };
 	vec3* origin = new vec3(0, 1.5, 10);
 
+	int song1;
 private:
 
 	//Countdown Checkers
