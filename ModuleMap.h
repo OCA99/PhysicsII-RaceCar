@@ -7,6 +7,7 @@ struct PhysBody3D;
 
 #define OBJECTS 20
 
+
 class ModuleMap : public Module
 {
 public:
@@ -24,6 +25,7 @@ public:
 	void ResetCountDown();
 	void NextLevel();
 	int GetLevel();
+	void Reset(float dt);
 
 	Primitive* CreateRectangle(vec3 position, vec4 rotation, vec3 size, Color s_color, float mass = 0.0f,bool render = true, bool countDown = false);
 	PhysSensor3D* CreateSensor(vec3 position, vec4 rotation, vec3 size,PhysSensor3D::Type type, float mass = 0.0f);
@@ -31,6 +33,7 @@ public:
 	Primitive* oneObj[OBJECTS] = { nullptr };
 	Primitive* twoObj[OBJECTS] = { nullptr };
 	Primitive* threeObj[OBJECTS] = { nullptr };
+	vec3* origin = new vec3(0, 1.5, 10);
 
 private:
 
