@@ -291,6 +291,30 @@ void ModulePlayer::LevelSpawn4()
 	trolley->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });
 }
 
+void ModulePlayer::LevelSpawn5()
+{
+	mat4x4 carMatrix;
+	vehicle->GetTransform(&carMatrix);
+
+	carMatrix.rotate(0, { 0, 1, 0 });
+	carMatrix.translate(100, 2, -110);
+
+	vehicle->SetTransform(&carMatrix.M[0]);
+
+	vehicle->vehicle->getRigidBody()->setLinearVelocity({ 0, 0, 0 });
+	vehicle->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });
+
+	trolley->GetTransform(&carMatrix);
+
+	carMatrix.rotate(0, { 0, 1, 0 });
+	carMatrix.translate(100, 1, -110);
+
+	trolley->SetTransform(&carMatrix.M[0]);
+
+	trolley->vehicle->getRigidBody()->setLinearVelocity({ 0, 0, 0 });
+	trolley->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });
+}
+
 // Update: draw background
 update_status ModulePlayer::Update(float dt)
 {
@@ -363,6 +387,11 @@ update_status ModulePlayer::Update(float dt)
 			LevelSpawn4();
 			break;
 		}
+		case 5:
+		{
+			LevelSpawn5();
+			break;
+		}
 		
 		default:
 			break;
@@ -386,7 +415,6 @@ update_status ModulePlayer::Update(float dt)
 	{
 	case 1:
 	{
-		
 
 		break;
 	}
@@ -425,6 +453,12 @@ update_status ModulePlayer::Update(float dt)
 		case 4:
 		{
 			LevelSpawn4();
+			lifes = 100;
+			break;
+		}
+		case 5:
+		{
+			LevelSpawn5();
 			lifes = 100;
 			break;
 		}

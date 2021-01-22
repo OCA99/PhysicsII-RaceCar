@@ -53,7 +53,11 @@ void ModuleMap::Reset(float dt)
 		App->player->LevelSpawn4();
 		break;
 	}
-
+	case 5:
+	{
+		App->player->LevelSpawn5();
+		break;
+	}
 	default:
 		break;
 	}
@@ -356,22 +360,29 @@ void ModuleMap::CreateRectangles()
 	App->map->CreateRectangle({ -6, 0,-90 }, { 0,0,0,1 }, { 5,1,1 }, Red);
 	//------------------------END OF LEVEL 4 = GG ----------------------
 
-	//------------------------END OF LEVEL 4 = GG ---------------------- 0,0,0 = 0,0,-100
+	//------------------------END OF LEVEL 5 = NOOB ---------------------- 0,0,0 = 100,0,-100
 
-	App->map->CreateRectangle({ 0,6,-90 }, { 0,0,0,1 }, { 5,1,1 }, Red);
-	App->map->CreateRectangle({ 2, 5,-90 }, { 90,0,0,1 }, { 3,1,1 }, Red);
-	App->map->CreateRectangle({ -1.6f,3,-90 }, { 0,0,0,1 }, { 1,1,1 }, Red);
-	App->map->CreateRectangle({ 2, 2,-90 }, { 90,0,0,1 }, { 3,1,1 }, Red);
-	App->map->CreateRectangle({ -2, 2,-90 }, { 90,0,0,1 }, { 3,1,1 }, Red);
-	App->map->CreateRectangle({ 0, 0,-90 }, { 0,0,0,1 }, { 5,1,1 }, Red);
+	App->map->CreateRectangle({ 108, 3,-90 }, { 90,0,0,1 }, { 7,1,1 }, Red);
+	App->map->CreateRectangle({ 106, 3,-90 }, { 60,0,0,1 }, { 7.3,1,1 }, Red);
+	App->map->CreateRectangle({ 104, 3,-90 }, { 90,0,0,1 }, { 7,1,1 }, Red);
 
-	App->map->CreateRectangle({ -6,6,-90 }, { 0,0,0,1 }, { 5,1,1 }, Red);
-	App->map->CreateRectangle({ -4, 5,-90 }, { 90,0,0,1 }, { 3,1,1 }, Red);
-	App->map->CreateRectangle({ -7.6f,3,-90 }, { 0,0,0,1 }, { 1,1,1 }, Red);
-	App->map->CreateRectangle({ -4, 2,-90 }, { 90,0,0,1 }, { 3,1,1 }, Red);
-	App->map->CreateRectangle({ -8, 2,-90 }, { 90,0,0,1 }, { 3,1,1 }, Red);
-	App->map->CreateRectangle({ -6, 0,-90 }, { 0,0,0,1 }, { 5,1,1 }, Red);
-	//------------------------END OF LEVEL 4 = GG ----------------------
+	App->map->CreateRectangle({100,6,-90 }, { 0,0,0,1 }, { 5,1,1 }, Red);
+	App->map->CreateRectangle({102, 3,-90 }, { 90,0,0,1 }, { 6,1,1 }, Red);
+	App->map->CreateRectangle({ 100,0,-90 }, { 0,0,0,1 }, { 5,1,1 }, Red);
+	App->map->CreateRectangle({ 98, 3,-90 }, { 90,0,0,1 }, { 6,1,1 }, Red);
+
+	App->map->CreateRectangle({ 94,6,-90 }, { 0,0,0,1 }, { 5,1,1 }, Red);
+	App->map->CreateRectangle({ 96, 3,-90 }, { 90,0,0,1 }, { 6,1,1 }, Red);
+	App->map->CreateRectangle({ 94,0,-90 }, { 0,0,0,1 }, { 5,1,1 }, Red);
+	App->map->CreateRectangle({ 92, 3,-90 }, { 90,0,0,1 }, { 6,1,1 }, Red);
+	
+	App->map->CreateRectangle({ 90, 3,-90 }, { 90,0,0,1 }, { 6,1,1 }, Red);
+	App->map->CreateRectangle({ 88.5f, 6,-90 }, { 0,0,0,1 }, { 4,1,1 }, Red);
+	App->map->CreateRectangle({ 88.5f, 3,-90 }, { 0,0,0,1 }, { 4,1,1 }, Red);
+	App->map->CreateRectangle({ 88.5f, 0,-90 }, { 0,0,0,1 }, { 4,1,1 }, Red);
+	App->map->CreateRectangle({ 87, 3,-90 }, { 90,0,0,1 }, { 6,1,1 }, Red);
+
+	//------------------------END OF LEVEL 5 = NOOB ----------------------
 
 	//Text THREE
 	threeObj[1] = App->map->CreateRectangle({ -18,13,110 }, { 0,0,0,1 }, { 5,1,1 }, Red, 0, false, true);
