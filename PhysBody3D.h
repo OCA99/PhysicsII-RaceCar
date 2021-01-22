@@ -39,7 +39,8 @@ public:
 	{
 		FINISH,
 		LAP,
-		DEAD
+		DEAD,
+		RESTART
 	};
 
 	PhysSensor3D(btRigidBody* body, Type _type);

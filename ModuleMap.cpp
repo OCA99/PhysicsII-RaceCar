@@ -31,6 +31,9 @@ void ModuleMap::Reset(float dt)
 {
 	App->player->canMove = false;
 	App->player->lifes = 3;
+	App->player->lap = false;
+	App->player->laps = 0;
+	level = 1;
 	switch (GetLevel())
 	{
 	case 1:
@@ -95,9 +98,7 @@ void ModuleMap::Reset(float dt)
 	oneObj[1]->SetPos(0, 10, 110);
 	oneObj[2]->SetPos(0.8f, 12, 110);
 
-	App->player->lap = false;
-	App->player->laps = 0;
-	level = 1;
+
 
 	CountDownSetPos(vec3(0, 0, 110), dt);
 
@@ -123,8 +124,14 @@ update_status ModuleMap::Update(float dt)
 		item = item->next;
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_G) == KEY_DOWN) Reset(dt);
-	if (App->player->lifes == 0) Reset(dt);
+	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) Reset(dt);
+	if (App->player->lifes <= 0)
+	{
+		App->player->LevelSpawn5();
+		App->player->canMove = true;
+		App->player->lifes = 3;
+		level = 5;
+	}
 	//App->physics->retDebug()->draw3dText({ 0,2,15 }, "Hello World!");
 
 	return UPDATE_CONTINUE;
@@ -358,6 +365,10 @@ void ModuleMap::CreateRectangles()
 	App->map->CreateRectangle({ -4, 2,-90 }, { 90,0,0,1 }, { 3,1,1 }, Red);
 	App->map->CreateRectangle({ -8, 2,-90 }, { 90,0,0,1 }, { 3,1,1 }, Red);
 	App->map->CreateRectangle({ -6, 0,-90 }, { 0,0,0,1 }, { 5,1,1 }, Red);
+
+	App->map->CreateRectangle({ -3, 0,-93 }, { 0,0,0,1 }, { 4,4,4 }, Red);
+
+	CreateSensor({ -3,0,-93 }, { 0,0, 0, 1 }, { 4,4,4 }, PhysSensor3D::Type::RESTART);/*RESTART BUTTON*/
 	//------------------------END OF LEVEL 4 = GG ----------------------
 
 	//------------------------END OF LEVEL 5 = NOOB ---------------------- 0,0,0 = 100,0,-100
@@ -381,6 +392,10 @@ void ModuleMap::CreateRectangles()
 	App->map->CreateRectangle({ 88.5f, 3,-90 }, { 0,0,0,1 }, { 4,1,1 }, Red);
 	App->map->CreateRectangle({ 88.5f, 0,-90 }, { 0,0,0,1 }, { 4,1,1 }, Red);
 	App->map->CreateRectangle({ 87, 3,-90 }, { 90,0,0,1 }, { 6,1,1 }, Red);
+
+	App->map->CreateRectangle({ 97, 0,-93 }, { 0,0,0,1 }, { 4,4,4 }, Red);
+
+	CreateSensor({ 97,0,-93 }, { 0,0, 0, 1 }, { 4,4,4 }, PhysSensor3D::Type::RESTART);/*RESTART BUTTON*/
 
 	//------------------------END OF LEVEL 5 = NOOB ----------------------
 
