@@ -381,7 +381,6 @@ update_status ModulePlayer::Update(float dt)
 	char title[80];
 	sprintf_s(title, "%.1f Km/h  Laps: %i Level: %d Lifes: %d", vehicle->GetKmh(), this->laps, App->map->GetLevel(),lifes);
 	App->window->SetTitle(title);
-
 	//CHECKPOINTS
 	switch (laps)
 	{

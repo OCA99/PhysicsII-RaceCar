@@ -29,8 +29,10 @@ bool ModuleMap::Start()
 
 void ModuleMap::Reset(float dt)
 {
+	App->player->canMove = false;
+	App->player->brake = BRAKE_POWER;
 	App->player->SetPos(origin);
-	
+	App->player->lifes = 3;
 
 	//threeObj[1] = App->map->CreateRectangle({ -18,13,110 }, { 0,0,0,1 }, { 5,1,1 }, Red, 0, false, true);
 	//threeObj[2] = App->map->CreateRectangle({ -20, 12,110 }, { 90,0,0,1 }, { 3,1,1 }, Red, 0, false, true);
@@ -66,7 +68,7 @@ void ModuleMap::Reset(float dt)
 	oneObj[2]->SetPos(0.8f, 12, 110);
 
 	App->player->lap = false;
-	App->player->laps = 1;
+	App->player->laps = 0;
 	level = 1;
 
 	CountDownSetPos(vec3(0, 0, 110), dt);
@@ -94,6 +96,7 @@ update_status ModuleMap::Update(float dt)
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_G) == KEY_DOWN) Reset(dt);
+	if (App->player->lifes == 0) Reset(dt);
 	//App->physics->retDebug()->draw3dText({ 0,2,15 }, "Hello World!");
 
 	return UPDATE_CONTINUE;
@@ -307,10 +310,27 @@ void ModuleMap::CreateRectangles()
 	//CreateRectangle({ -110,10.3f,163 }, { 340,0, 0, 1 }, { 0.3f,10,3 }, Red);
 	CreateRectangle({ -110,5,160 }, { 0,0, 0, 1 }, { 14,0.3f,10 }, Red);
 
-	CreateSensor({ -95,0,80.0f }, { 0,0, 0, 1 }, { 60,1,130 }, PhysSensor3D::Type::DEAD);/*MIDDLE*/
+	CreateSensor({ -95,0,105.0f }, { 0,0, 0, 1 }, { 60,1,170 }, PhysSensor3D::Type::DEAD);/*MIDDLE*/
 	CreateSensor({ -110,5,160 }, { 0,0, 0, 1 }, { 14,0.3f,20 }, PhysSensor3D::Type::FINISH);/*FINISH*/
 
 	//------------------------END OF LEVEL 3----------------------
+
+	//------------------------END OF LEVEL 4 = GG ---------------------- 0,0,0 = 0,0,-100
+
+	App->map->CreateRectangle({ 0,6,-90 }, { 0,0,0,1 }, { 5,1,1 }, Red);
+	App->map->CreateRectangle({ 2, 5,-90 }, { 90,0,0,1 }, { 3,1,1 }, Red);
+	App->map->CreateRectangle({ -1.6f,3,-90 }, { 0,0,0,1 }, { 1,1,1 }, Red);
+	App->map->CreateRectangle({ 2, 2,-90 }, { 90,0,0,1 }, { 3,1,1 }, Red);
+	App->map->CreateRectangle({ -2, 2,-90 }, { 90,0,0,1 }, { 3,1,1 }, Red);
+	App->map->CreateRectangle({ 0, 0,-90 }, { 0,0,0,1 }, { 5,1,1 }, Red);
+
+	App->map->CreateRectangle({ -6,6,-90 }, { 0,0,0,1 }, { 5,1,1 }, Red);
+	App->map->CreateRectangle({ -4, 5,-90 }, { 90,0,0,1 }, { 3,1,1 }, Red);
+	App->map->CreateRectangle({ -7.6f,3,-90 }, { 0,0,0,1 }, { 1,1,1 }, Red);
+	App->map->CreateRectangle({ -4, 2,-90 }, { 90,0,0,1 }, { 3,1,1 }, Red);
+	App->map->CreateRectangle({ -8, 2,-90 }, { 90,0,0,1 }, { 3,1,1 }, Red);
+	App->map->CreateRectangle({ -6, 0,-90 }, { 0,0,0,1 }, { 5,1,1 }, Red);
+	//------------------------END OF LEVEL 4 = GG ----------------------
 
 	//------------------------END OF LEVEL 4 = GG ---------------------- 0,0,0 = 0,0,-100
 
