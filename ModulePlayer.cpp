@@ -408,7 +408,12 @@ update_status ModulePlayer::Update(float dt)
 	//trolley2->Render();
 
 	char title[80];
-	sprintf_s(title, "%.1f Km/h  Laps: %i Level: %d Lifes: %d", vehicle->GetKmh(), this->laps, App->map->GetLevel(),lifes);
+	if (App->map->GetLevel() != 4 && App->map->GetLevel() != 5)
+		sprintf_s(title, "%.1f Km/h  Laps: %i Level: %d Lifes: %d", vehicle->GetKmh(), this->laps, App->map->GetLevel(), lifes);
+	else if (App->map->GetLevel() == 4)
+		sprintf_s(title, "%.1f Km/h  Laps: %i Level: %d Lifes: %d HIT THE BOX OR PRESS P TO RESTART", vehicle->GetKmh(), this->laps, App->map->GetLevel(), lifes);
+	else if (App->map->GetLevel() == 5)
+		sprintf_s(title, "%.1f Km/h  Laps: %i Level: %d Lifes: %d HIT THE BOX OR PRESS P TO RESTART", vehicle->GetKmh(), this->laps, App->map->GetLevel(), lifes);
 	App->window->SetTitle(title);
 	//CHECKPOINTS
 	switch (laps)
@@ -453,12 +458,14 @@ update_status ModulePlayer::Update(float dt)
 		case 4:
 		{
 			LevelSpawn4();
+			canMove = true;
 			lifes = 100;
 			break;
 		}
 		case 5:
 		{
 			LevelSpawn5();
+			canMove = true;
 			lifes = 100;
 			break;
 		}
