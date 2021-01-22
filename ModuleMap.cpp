@@ -5,7 +5,7 @@
 #include "ModulePhysics3D.h"
 #include "Primitive.h"
 #include "PhysBody3D.h"
-
+#include "ModuleAudio.h"
 
 ModuleMap::ModuleMap(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -22,7 +22,7 @@ bool ModuleMap::Start()
 	bool ret = true;
 	//Create Map
 	CreateRectangles();
-
+	App->audio->PlayMusic("External/Audio/Music/TheSong.ogg", 1.0f);
 	return ret;
 }
 
