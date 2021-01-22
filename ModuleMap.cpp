@@ -30,9 +30,33 @@ bool ModuleMap::Start()
 void ModuleMap::Reset(float dt)
 {
 	App->player->canMove = false;
-	App->player->brake = BRAKE_POWER;
-	App->player->SetPos(origin);
 	App->player->lifes = 3;
+	switch (GetLevel())
+	{
+	case 1:
+	{
+		App->player->LevelSpawn1();
+		break;
+	}
+	case 2:
+	{
+		App->player->LevelSpawn2();
+		break;
+	}
+	case 3:
+	{
+		App->player->LevelSpawn3();
+		break;
+	}
+	case 4:
+	{
+		App->player->LevelSpawn4();
+		break;
+	}
+
+	default:
+		break;
+	}
 
 	//threeObj[1] = App->map->CreateRectangle({ -18,13,110 }, { 0,0,0,1 }, { 5,1,1 }, Red, 0, false, true);
 	//threeObj[2] = App->map->CreateRectangle({ -20, 12,110 }, { 90,0,0,1 }, { 3,1,1 }, Red, 0, false, true);
