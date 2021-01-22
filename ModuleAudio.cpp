@@ -41,6 +41,10 @@ bool ModuleAudio::Init()
 		ret = false;
 	}
 
+	LoadFx("External/Audio/Fx/horn.wav");//1
+	LoadFx("External/Audio/Fx/applause.wav");//2
+	LoadFx("External/Audio/Fx/motor.wav");//3
+
 	return ret;
 }
 

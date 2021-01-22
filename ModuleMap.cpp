@@ -22,7 +22,7 @@ bool ModuleMap::Start()
 	bool ret = true;
 	//Create Map
 	CreateRectangles();
-	App->audio->PlayMusic("External/Audio/Music/TheSong.ogg", 1.0f);
+	//App->audio->PlayMusic("External/Audio/Music/TheSong.ogg", 1.0f);
 	return ret;
 }
 
@@ -167,6 +167,9 @@ void ModuleMap::CountDownSetPos(vec3 pos, float dt)
 		threeObj[3]->SetPos(pos.x - 18, pos.y + 10, pos.z);
 		threeObj[4]->SetPos(pos.x - 20, pos.y + 9, pos.z);
 		threeObj[5]->SetPos(pos.x - 18, pos.y + 7, pos.z);
+
+		App->audio->PlayFx(3, 0);
+
 	}
 
 	if ((int)counter == 3 && !one)
