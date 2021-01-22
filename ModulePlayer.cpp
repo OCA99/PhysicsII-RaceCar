@@ -323,6 +323,10 @@ update_status ModulePlayer::Update(float dt)
 	{
 		laps = 3;
 	}
+	if (App->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN)
+	{
+		App->audio->PlayFx(1, 0);
+	}
 	if (canMove)
 	{
 		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
@@ -433,6 +437,7 @@ update_status ModulePlayer::Update(float dt)
 	{
 		App->map->NextLevel();
 		App->map->ResetCountDown();
+		App->audio->PlayFx(2, 0);
 		switch (App->map->GetLevel())
 		{
 		case 1:
