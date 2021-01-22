@@ -148,6 +148,13 @@ bool ModulePlayer::Start()
 	return true;
 }
 
+void ModulePlayer::SetPos(vec3* pos)
+{
+	vehicle->SetPos(pos->x,pos->y,pos->z);
+	trolley->SetPos(pos->x, pos->y-0.5f, pos->z-2.0f);
+
+}
+
 // Unload assets
 bool ModulePlayer::CleanUp()
 {
