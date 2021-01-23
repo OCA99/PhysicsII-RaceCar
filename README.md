@@ -20,6 +20,7 @@ Your challenge will be to complete 3 Level of the Game without running out of li
 **T**: Play the Horn.
 
 *Debug Mode:*
+
 **R**: Skip to the next Level.
 
 **Space**: Respawn the car.
