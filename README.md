@@ -1,23 +1,25 @@
 # PhysicsII-RaceCar CITM
-We are 3 second year students from CITM University in Barcelona. We have been asked to develope a Racing Car game using OpenGL, Bullet and SDL libraries. There is at least one constrait of any type, we used a trooley in order to achieve this effect.
+We are 3 second year students from CITM University in Barcelona. We have been asked to develop a Racing Car game using OpenGL, Bullet and SDL libraries. 
+
+There is at least one constrait of any type, we used a trooley in order to achieve this effect.
 #### 📷 Screenshot 📷
 ![](Screenshots/citm_for_speed.png)
 #### 🚥 How to Play 🚥
 Your challenge will be to complete 3 Level of the Game without running out of lifes. You will have 3 lifes on each level.
 
-Lvl 1: Complete 3 Laps.
+**Lvl 1**: Complete 3 Laps.
 
-Lvl 2: Complete the Path without falling.
+**Lvl 2**: Complete the Path without falling.
 
-Lvl 3: Complete the Path without falling.
+**Lvl 3**: Complete the Path without falling.
 #### 🕹️ Controls 🕹️
-Left,Right Up & Down Arrows: Move the car.
+**⬇⬆⬅➡**: Move the car.
 
-T: Play the Horn.
+**T**: Play the Horn.
 
-Space: Respawn the car.
+**Space**: Respawn the car.
 
-R: Skip to the next Level.
+**R**: Skip to the next Level.
 #### 🛠️ Developers 🛠️
 - Oscar Cuatrecasas - developer, testing.
 
