@@ -12,21 +12,30 @@ Your challenge will be to complete 3 Level of the Game without running out of li
 **Lvl 2**: Complete the Path without falling.
 
 **Lvl 3**: Complete the Path without falling.
+
 #### 🕹️ Controls 🕹️
+
 **⬇⬆⬅➡**: Move the car.
 
 **T**: Play the Horn.
 
+*Debug Mode:*
+**R**: Skip to the next Level.
+
 **Space**: Respawn the car.
 
-**R**: Skip to the next Level.
+**F1**: See Sensors.
+
 #### 🛠️ Developers 🛠️
+
 - Oscar Cuatrecasas - developer, testing.
 
 - Aitor Álvarez - developer, music.
 
 - Telmo Beroiz - developer, art.
+
 #### ⚖️ Licence ⚖️
+
 This project is licensed under an unmodified MIT license, which is an OSI-certified license that allows static linking with closed source software. Check LICENSE for further details.
 
 [SDL License](https://www.libsdl.org/license.php)
