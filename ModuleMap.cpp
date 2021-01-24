@@ -316,7 +316,7 @@ void ModuleMap::CreateRectangles()
 	CreateRectangle({ 127,10.3f,62 }, { 60,1, 0, 0 }, { 3,25,0.3f }, Red);
 	CreateRectangle({ 127,15.3f,84 }, { 0,0, 0, 1 }, { 14,0.3f,20 }, Red);
 
-	CreateSensor({ 110,0,80.0f }, { 0,0, 0, 1 }, { 60,1,100 }, PhysSensor3D::Type::DEAD);/*MIDDLE*/
+	CreateSensor({ 110,0,80.0f }, { 0,0, 0, 1 }, { 60,2,100 }, PhysSensor3D::Type::DEAD);/*MIDDLE*/
 	CreateSensor({ 127,15.3f,84 }, { 0,0, 0, 1 }, { 14,0.3,20 }, PhysSensor3D::Type::FINISH);/*FINISH*/
 
 	//------------------------END OF LEVEL 2----------------------
