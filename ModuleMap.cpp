@@ -22,7 +22,7 @@ bool ModuleMap::Start()
 	bool ret = true;
 	//Create Map
 	CreateRectangles();
-	//App->audio->PlayMusic("External/Audio/Music/TheSong.ogg", 1.0f);
+	App->audio->PlayMusic("External/Audio/Music/TheSong.ogg", 1.0f);
 	return ret;
 }
 
