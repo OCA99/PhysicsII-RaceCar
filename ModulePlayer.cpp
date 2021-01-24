@@ -148,10 +148,10 @@ bool ModulePlayer::Start()
 	return true;
 }
 
-void ModulePlayer::SetPos(vec3* pos)
+void ModulePlayer::SetPos(vec3 pos)
 {
-	vehicle->SetPos(pos->x,pos->y,pos->z);
-	trolley->SetPos(pos->x, pos->y-0.5f, pos->z-2.0f);
+	vehicle->SetPos(pos.x,pos.y,pos.z);
+	trolley->SetPos(pos.x, pos.y-0.5f, pos.z-2.0f);
 
 }
 
@@ -171,6 +171,8 @@ void ModulePlayer::LevelSpawn1()
 	carMatrix.rotate(0, { 0, 1, 0 });
 	carMatrix.translate(0, 2, 10);
 
+	//SetPos({ 0,2,10 });
+
 	vehicle->SetTransform(&carMatrix.M[0]);
 
 	vehicle->vehicle->getRigidBody()->setLinearVelocity({ 0, 0, 0 });
@@ -179,22 +181,13 @@ void ModulePlayer::LevelSpawn1()
 	trolley->GetTransform(&carMatrix);
 
 	carMatrix.rotate(0, { 0, 1, 0 });
-	carMatrix.translate(0, 1, 8);
+	carMatrix.translate(0, 2, 6);
 
 	trolley->SetTransform(&carMatrix.M[0]);
 
 	trolley->vehicle->getRigidBody()->setLinearVelocity({ 0, 0, 0 });
 	trolley->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });
-
-	//trolley2->GetTransform(&carMatrix);
-
-	//carMatrix.rotate(0, { 0, 1, 0 });
-	//carMatrix.translate(0, 1, 6);
-
-	//trolley2->SetTransform(&carMatrix.M[0]);
-
-	//trolley2->vehicle->getRigidBody()->setLinearVelocity({ 0, 0, 0 });
-	//trolley2->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });
+	
 }
 
 void ModulePlayer::LevelSpawn2()
@@ -213,7 +206,7 @@ void ModulePlayer::LevelSpawn2()
 	trolley->GetTransform(&carMatrix);
 
 	carMatrix.rotate(0, { 0, 1, 0 });
-	carMatrix.translate(100, 1, -8);
+	carMatrix.translate(100, 2, -14);
 
 	trolley->SetTransform(&carMatrix.M[0]);
 
@@ -221,15 +214,7 @@ void ModulePlayer::LevelSpawn2()
 	trolley->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });
 
 
-	//trolley2->GetTransform(&carMatrix);
-
-	//carMatrix.rotate(0, { 0, 1, 0 });
-	//carMatrix.translate(0, 1, 6);
-
-	//trolley2->SetTransform(&carMatrix.M[0]);
-
-	//trolley2->vehicle->getRigidBody()->setLinearVelocity({ 0, 0, 0 });
-	//trolley2->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });
+	
 }
 
 void ModulePlayer::LevelSpawn3()
@@ -248,7 +233,7 @@ void ModulePlayer::LevelSpawn3()
 	trolley->GetTransform(&carMatrix);
 
 	carMatrix.rotate(0, { 0, 1, 0 });
-	carMatrix.translate(-100, 1, -8);
+	carMatrix.translate(-100, 2, -14);
 
 	trolley->SetTransform(&carMatrix.M[0]);
 
@@ -256,15 +241,7 @@ void ModulePlayer::LevelSpawn3()
 	trolley->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });
 
 
-	//trolley2->GetTransform(&carMatrix);
-
-	//carMatrix.rotate(0, { 0, 1, 0 });
-	//carMatrix.translate(0, 1, 6);
-
-	//trolley2->SetTransform(&carMatrix.M[0]);
-
-	//trolley2->vehicle->getRigidBody()->setLinearVelocity({ 0, 0, 0 });
-	//trolley2->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });
+	
 }
 
 void ModulePlayer::LevelSpawn4()
@@ -283,7 +260,7 @@ void ModulePlayer::LevelSpawn4()
 	trolley->GetTransform(&carMatrix);
 
 	carMatrix.rotate(0, { 0, 1, 0 });
-	carMatrix.translate(-3, 1, -110);
+	carMatrix.translate(-3, 2, -114);
 
 	trolley->SetTransform(&carMatrix.M[0]);
 
@@ -307,7 +284,7 @@ void ModulePlayer::LevelSpawn5()
 	trolley->GetTransform(&carMatrix);
 
 	carMatrix.rotate(0, { 0, 1, 0 });
-	carMatrix.translate(100, 1, -110);
+	carMatrix.translate(100, 2, -114);
 
 	trolley->SetTransform(&carMatrix.M[0]);
 

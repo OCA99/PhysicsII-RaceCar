@@ -24,7 +24,7 @@ public:
 	void LevelSpawn3();
 	void LevelSpawn4();
 	void LevelSpawn5();
-	void SetPos(vec3* pos);
+	void SetPos(vec3 pos);
 public:
 
 	PhysVehicle3D* vehicle;

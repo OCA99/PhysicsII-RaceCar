@@ -23,6 +23,7 @@ bool ModuleMap::Start()
 	//Create Map
 	CreateRectangles();
 	App->audio->PlayMusic("External/Audio/Music/TheSong.ogg", 1.0f);
+	
 	return ret;
 }
 
@@ -65,11 +66,6 @@ void ModuleMap::Reset(float dt)
 		break;
 	}
 
-	//threeObj[1] = App->map->CreateRectangle({ -18,13,110 }, { 0,0,0,1 }, { 5,1,1 }, Red, 0, false, true);
-	//threeObj[2] = App->map->CreateRectangle({ -20, 12,110 }, { 90,0,0,1 }, { 3,1,1 }, Red, 0, false, true);
-	//threeObj[3] = App->map->CreateRectangle({ -18, 10,110 }, { 0,0,0,1 }, { 5,1,1 }, Red, 0, false, true);
-	//threeObj[4] = App->map->CreateRectangle({ -20, 9,110 }, { 90,0,0,1 }, { 3,1,1 }, Red, 0, false, true);
-	//threeObj[5] = App->map->CreateRectangle({ -18, 7,110 }, { 0,0,0,1 }, { 5,1,1 }, Red, 0, false, true);
 
 	threeObj[1]->SetPos( -18,13,110 );
 	threeObj[2]->SetPos(-20, 12, 110);
@@ -78,27 +74,15 @@ void ModuleMap::Reset(float dt)
 	threeObj[5]->SetPos(-18, 7, 110);
 
 
-	//Text TWO
-	/*twoObj[1] = CreateRectangle({ -8, 13,110 }, { 0,0,0,1 }, { 5,1,1 }, Green, 0, false, true);
-	twoObj[2] = CreateRectangle({ -10, 12,110 }, { 90,0,0,1 }, { 3,1,1 }, Green, 0, false, true);
-	twoObj[3] = CreateRectangle({ -8, 10,110 }, { 0,0,0,1 }, { 5,1,1 }, Green, 0, false, true);
-	twoObj[4] = CreateRectangle({ -6, 9,110 }, { 90,0,0,1 }, { 3,1,1 }, Green, 0, false, true);
-	twoObj[5] = CreateRectangle({ -8, 7,110 }, { 0,0,0,1 }, { 5,1,1 }, Green, 0, false, true);*/
-
 	twoObj[1]->SetPos(-8, 13, 110);
 	twoObj[2]->SetPos(-10, 12, 110);
 	twoObj[3]->SetPos(-8, 10, 110);
 	twoObj[4]->SetPos(-6, 9, 110);
 	twoObj[5]->SetPos(-8, 7, 110);
 
-	//Text ONE
-	/*oneObj[1] = App->map->CreateRectangle({ 0,10,110 }, { 0,0,0,1 }, { 1,8.0f,1 }, White, 0, false, true);
-	oneObj[2] = App->map->CreateRectangle({ 0.8f,12,110 }, { 30,0,0,1 }, { 1,3.0f,1 }, White, 0, false, true);*/
 
 	oneObj[1]->SetPos(0, 10, 110);
 	oneObj[2]->SetPos(0.8f, 12, 110);
-
-
 
 	CountDownSetPos(vec3(0, 0, 110), dt);
 
