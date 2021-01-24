@@ -160,7 +160,12 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 					if (App->map->GetLevel() == 4)
 					{
 						App->player->LevelSpawn4();
-						App->player->lifes--;
+		
+					}
+					if (App->map->GetLevel() == 5)
+					{
+						App->player->LevelSpawn5();
+	
 					}
 					break;
 				}
