@@ -124,7 +124,11 @@ update_status ModuleMap::Update(float dt)
 		item = item->next;
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) Reset(dt);
+	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
+	{
+		if(level == 5 || level == 4)
+			Reset(dt);
+	}
 	if (App->player->lifes <= 0)
 	{
 		App->player->LevelSpawn5();
