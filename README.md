@@ -2,10 +2,13 @@
 We are 3 second year students from CITM University in Barcelona. We have been asked to develop a Racing Car game using OpenGL, Bullet and SDL libraries. 
 
 There is at least one constrait of any type, we used a trooley in order to achieve this effect.
+
+[GITHUB REPOSITORY](https://github.com/OCA99/PhysicsII-RaceCar)
+
 #### 📷 Screenshot 📷
 ![](Screenshots/citm_for_speed.png)
 
-#### 🚥 How to Play 🚥
+#### 🎌 GOAL 🎌
 Your challenge will be to complete 3 Level of the Game without running out of lifes. You will have 3 lifes on each level.
 
 **Lvl 1**: Complete 3 Laps.
@@ -20,21 +23,21 @@ Your challenge will be to complete 3 Level of the Game without running out of li
 
 **T**: Play the Horn.
 
-*Debug Mode:*
+**P**: Restart the Game
 
-**R**: Skip to the next Level.
+**DEBUG-R**: Skip to the next Level.
 
-**Space**: Respawn the car.
+**DEBUG-Space**: Respawn the car.
 
-**F1**: See Sensors.
+**DEBUG-F1**: See Sensors.
 
 #### 🛠️ Developers 🛠️
 
-- Oscar Cuatrecasas - developer, testing.
+- [Oscar Cuatrecasas - developer, testing.](https://github.com/OCA99) 
 
-- Aitor Álvarez - developer, music.
+- [Aitor Álvarez - developer, music.](https://github.com/AitorAlvarez17) 
 
-- Telmo Beroiz - developer, art.
+- [Telmo Beroiz - developer, art.](https://github.com/Telmiyo) 
 
 #### ⚖️ Licence ⚖️
 
