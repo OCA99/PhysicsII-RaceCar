@@ -33,11 +33,11 @@ Your challenge will be to complete 3 Level of the Game without running out of li
 
 #### 🛠️ Developers 🛠️
 
-- [Oscar Cuatrecasas - developer, testing.](https://github.com/OCA99) 
+- [Oscar Cuatrecasas ](https://github.com/OCA99) - developer, testing.
 
-- [Aitor Álvarez - developer, music.](https://github.com/AitorAlvarez17) 
+- [Aitor Álvarez ](https://github.com/AitorAlvarez17) - developer, music.
 
-- [Telmo Beroiz - developer, art.](https://github.com/Telmiyo) 
+- [Telmo Beroiz ](https://github.com/Telmiyo) - developer, art.
 
 #### ⚖️ Licence ⚖️
 
